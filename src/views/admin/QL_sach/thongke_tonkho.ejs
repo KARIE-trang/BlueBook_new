@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thống kê tồn kho - BlueBook Admin</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="/admin/css/home.css" />
+    <link rel="stylesheet" href="/admin/css/QL_sach/thongke_tonkho.css" />
+
+    <!-- ICON & FONT -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo-text">BlueBook</span>
+      </div>
+
+      <div class="logo-divider"></div>
+
+      <nav class="menu">
+        <a href="/admin/home" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <div class="menu-group">
+          <button class="menu-item dropdown-btn active">
+            <div class="menu-left">
+              <i class="fa-solid fa-book"></i>
+              <span>Sách</span>
+            </div>
+            <i class="fa-solid fa-chevron-down arrow rotate"></i>
+          </button>
+
+          <div class="dropdown show">
+            <a href="/admin/quanlysach" class="menu-sub">
+              <i class="fa-solid fa-list"></i> Danh sách sách
+            </a>
+
+            <a href="/admin/theloai" class="menu-sub">
+              <i class="fa-solid fa-shapes"></i> Thể loại
+            </a>
+
+            <a href="/admin/thongke-tonkho" class="menu-sub active">
+              <i class="fa-solid fa-chart-column"></i> Thống kê tồn kho
+            </a>
+          </div>
+        </div>
+
+        <a href="/quanlykhachhang" class="menu-item">
+          <i class="fa-solid fa-users"></i> Khách hàng
+        </a>
+
+        <a href="/admin/quanlydonhang" class="menu-item">
+          <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+        </a>
+
+        <a href="/admin/doanhthu?preset=today" class="menu-item">
+          <i class="fa-solid fa-coins"></i> Doanh thu
+        </a>
+
+        <a href="/logout" class="menu-item logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </a>
+      </nav>
+    </aside>
+
+    <!-- ===================== TOPBAR ===================== -->
+    <header class="topbar">
+      <div class="top-right">
+        <div class="user-box">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">Admin</span>
+          <span class="role">Quản trị viên</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Thống Kê Tồn Kho</h1>
+          <p class="page-subtitle">
+            Theo dõi tình trạng tồn kho tổng quan, sách tồn thấp và tồn theo thể
+            loại.
+          </p>
+        </div>
+      </div>
+
+      <!-- ===== 4 THẺ THỐNG KÊ ===== -->
+      <div class="stats">
+        <!-- CARD 1 -->
+        <div class="stat-card">
+          <div class="icon bg-blue">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div class="value"><%= tongsach.soluong %></div>
+          <p class="label">Tổng số lượng tồn kho</p>
+          <p class="note">Bao gồm toàn bộ sách hiện có trong kho</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="stat-card">
+          <div class="icon bg-orange">
+            <i class="fa-solid fa-box"></i>
+          </div>
+          <div class="value"><%= sachtonitnhat.sl_tonkho %></div>
+          <p class="label">Sách tồn thấp nhất</p>
+          <p class="note">
+            <strong><%= sachtonitnhat.tensach %></strong>
+          </p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="stat-card">
+          <div class="icon bg-purple">
+            <i class="fa-solid fa-warehouse"></i>
+          </div>
+          <div class="value"><%= sachtonnhieunhat.sl_tonkho %></div>
+          <p class="label">Sách tồn nhiều nhất</p>
+          <p class="note">
+            <strong><%= sachtonnhieunhat.tensach %></strong>
+          </p>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="stat-card">
+          <div class="icon bg-green">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <div class="value"><%= theloainhieusach.tentheloai %></div>
+          <p class="label">Thể loại có nhiều sách tồn nhất</p>
+          <p class="note">
+            Tổng tồn:
+            <strong><%= theloainhieusach.sl %></strong> quyển
+          </p>
+        </div>
+      </div>
+
+      <!-- ===== TOP 5 SÁCH TỒN THẤP ===== -->
+      <div class="table-wrap">
+        <div class="table-header">
+          <h2 class="sub-title">Top 5 sách tồn thấp nhất</h2>
+          <span class="table-hint">
+            <i class="fa-solid fa-triangle-exclamation"></i> Sách có tồn kho
+            &le; 5 sẽ được đánh dấu cảnh báo.
+          </span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>Ảnh</th>
+                <th>Mã sách</th>
+                <th>Tên sách</th>
+                <th>Tác giả</th>
+                <th class="text-right">Tồn kho</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% sachtonitnhat_list.forEach(row => { %>
+              <tr class="<%= row.sl_tonkho <= 5 ? 'row-low' : '' %>">
+                <td>
+                  <img src="/uploads/<%= row.hinhanh %>" class="book-img" />
+                </td>
+                <td><%= row.masach %></td>
+                <td><%= row.tensach %></td>
+                <td><%= row.tentacgia %></td>
+                <td class="text-right">
+                  <span
+                    class="stock-badge <%= row.sl_tonkho <= 5 ? 'stock-low' : '' %>"
+                  >
+                    <%= row.sl_tonkho %>
+                  </span>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== TỒN KHO THEO THỂ LOẠI ===== -->
+      <div class="table-wrap">
+        <div class="table-header">
+          <h2 class="sub-title">Tồn kho theo thể loại</h2>
+          <span class="table-hint">
+            Tổng số lượng sách tồn của từng thể loại trong kho.
+          </span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>Mã TL</th>
+                <th>Thể loại</th>
+                <th class="text-right">Tổng tồn</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% theloai.forEach(tl => { %>
+              <tr>
+                <td><%= tl.matheloai %></td>
+                <td><%= tl.tentheloai %></td>
+                <td class="text-right">
+                  <span class="stock-badge"><%= tl.soluong %></span>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- JS DROPDOWN -->
+    <script>
+      const btn = document.querySelector(".dropdown-btn");
+      const drop = document.querySelector(".dropdown");
+      const arrow = document.querySelector(".arrow");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          drop.classList.toggle("show");
+          arrow.classList.toggle("rotate");
+        });
+      }
+    </script>
+  </body>
+</html>

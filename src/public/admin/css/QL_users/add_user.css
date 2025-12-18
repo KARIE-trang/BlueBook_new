@@ -1,0 +1,207 @@
+/* ================= GENERAL ================= */
+
+.main {
+  padding: 22px;
+  font-family: "Nunito", sans-serif;
+  color: #111827;
+}
+
+/* Cho cả header + card đều chung max-width và căn giữa */
+.page-header,
+.user-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto; /* căn giữa theo chiều ngang */
+}
+
+/* ================= PAGE HEADER ================= */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e0ecff;
+  color: #2563eb;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.back-link:hover {
+  background: #c7dcff;
+}
+
+/* ================= CARD CONTAINER ================= */
+
+.user-card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.form-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-title i {
+  color: #2563eb;
+}
+
+/* ================= FORM LAYOUT ================= */
+
+.form-add-user {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.form-group input {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 14px;
+  transition: 0.15s;
+}
+
+.form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.hint {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: -2px;
+}
+
+/* ================= ERROR MESSAGE ================= */
+
+.error-msg {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-left: 4px solid #dc2626;
+}
+
+/* ================= FORM BUTTONS ================= */
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-cancel,
+.btn-submit {
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Huỷ */
+.btn-cancel {
+  background: #e5e7eb;
+  color: #374151;
+  text-decoration: none;
+}
+
+.btn-cancel:hover {
+  background: #d1d5db;
+}
+
+/* Lưu */
+.btn-submit {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-submit:hover {
+  background: #1d4ed8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .page-header,
+  .user-card {
+    max-width: 100%;
+  }
+
+  .user-card {
+    padding: 18px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

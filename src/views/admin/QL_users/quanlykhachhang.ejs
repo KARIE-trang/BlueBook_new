@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Khách Hàng - BlueBook</title>
+
+    <link rel="stylesheet" href="/admin/css/home.css" />
+    <link rel="stylesheet" href="/admin/css/QL_users/quanlykhachhang.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo-text">BlueBook</span>
+      </div>
+
+      <div class="logo-divider"></div>
+
+      <nav class="menu">
+        <a href="/admin/home" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <!-- MENU SÁCH (ĐÓNG LẠI, KHÔNG ACTIVE) -->
+        <div class="menu-group">
+          <button class="menu-item dropdown-btn">
+            <div class="menu-left">
+              <i class="fa-solid fa-book"></i>
+              <span>Sách</span>
+            </div>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </button>
+
+          <div class="dropdown">
+            <a href="/admin/quanlysach" class="menu-sub">
+              <i class="fa-solid fa-list"></i> Danh sách sách
+            </a>
+            <a href="/admin/theloai" class="menu-sub">
+              <i class="fa-solid fa-shapes"></i> Thể loại
+            </a>
+            <a href="/admin/thongke-tonkho" class="menu-sub">
+              <i class="fa-solid fa-chart-column"></i> Thống kê tồn kho
+            </a>
+          </div>
+        </div>
+
+        <!-- KHÁCH HÀNG (ĐÚNG MỤC ĐANG ACTIVE) -->
+        <a href="/quanlykhachhang" class="menu-item active">
+          <i class="fa-solid fa-users"></i> Khách hàng
+        </a>
+
+        <a href="/admin/quanlydonhang" class="menu-item">
+          <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+        </a>
+
+        <a href="/admin/doanhthu?preset=today" class="menu-item">
+          <i class="fa-solid fa-coins"></i> Doanh thu
+        </a>
+
+        <a href="/logout" class="menu-item logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </a>
+      </nav>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="top-right">
+        <div class="user-box">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">Admin</span>
+          <span class="role">Quản trị viên</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="container-content">
+        <div class="top-section">
+          <h1 class="page-title">Quản Lý Khách Hàng</h1>
+
+          <a href="/add_user" class="add-btn">
+            <i class="fa-solid fa-user-plus"></i> Thêm Khách Hàng
+          </a>
+        </div>
+
+        <h2 class="sub-title">Danh sách khách hàng</h2>
+
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Tài Khoản</th>
+              <th>Mật Khẩu</th>
+              <th>Họ Tên</th>
+              <th>Email</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% for (let i = 0; i < user.length; i++) { %>
+            <tr>
+              <td><%= user[i].user_id %></td>
+              <td><%= user[i].taikhoan %></td>
+              <td><%= user[i].matkhau %></td>
+              <td><%= user[i].hoten %></td>
+              <td><%= user[i].email %></td>
+
+              <td>
+                <% if (user[i].trangthai_user === "ACTIVE") { %>
+                <span class="status active">Đang hoạt động</span>
+                <% } else { %>
+                <span class="status blocked">Bị khóa</span>
+                <% } %>
+              </td>
+
+              <td class="action-col">
+                <!-- SỬA -->
+                <a
+                  href="/edit_user/<%= user[i].user_id %>"
+                  class="action-btn edit"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+
+                <!-- KHÓA / MỞ KHÓA -->
+                <% if (user[i].trangthai_user === "ACTIVE") { %>
+                <a
+                  href="#"
+                  class="action-btn lock delete-btn"
+                  data-id="<%= user[i].user_id %>"
+                  data-name="<%= user[i].taikhoan %>"
+                >
+                  <i class="fa-solid fa-lock"></i>
+                </a>
+                <% } else { %>
+                <a
+                  href="/unlock_user/<%= user[i].user_id %>"
+                  class="action-btn unlock"
+                >
+                  <i class="fa-solid fa-unlock"></i>
+                </a>
+                <% } %>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="delete-modal" class="modal-overlay">
+      <div class="modal-box">
+        <h3>Xác nhận khóa</h3>
+        <p id="delete-message">Bạn có chắc chắn muốn khóa tài khoản này?</p>
+        <div class="modal-actions">
+          <button id="confirm-delete" class="btn-confirm">Đồng ý</button>
+          <button id="cancel-delete" class="btn-cancel">Hủy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script>
+      /* Toggle Dropdown */
+      const dropdownBtn = document.querySelector(".dropdown-btn");
+      const dropdown = document.querySelector(".dropdown");
+      const arrow = document.querySelector(".arrow");
+
+      dropdownBtn.addEventListener("click", () => {
+        dropdown.classList.toggle("show");
+        arrow.classList.toggle("rotate");
+      });
+
+      /* MODAL */
+      const deleteButtons = document.querySelectorAll(".delete-btn");
+      const modal = document.getElementById("delete-modal");
+      const msg = document.getElementById("delete-message");
+      const confirmBtn = document.getElementById("confirm-delete");
+      const cancelBtn = document.getElementById("cancel-delete");
+
+      let deleteUrl = "";
+
+      deleteButtons.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const id = this.getAttribute("data-id");
+          const name = this.getAttribute("data-name");
+
+          msg.innerHTML = `Bạn có chắc chắn muốn khóa <b>${name}</b> (ID ${id})?`;
+          deleteUrl = `/block_user/${id}`;
+          modal.style.display = "flex";
+        });
+      });
+
+      confirmBtn.onclick = () => (window.location.href = deleteUrl);
+      cancelBtn.onclick = () => (modal.style.display = "none");
+    </script>
+  </body>
+</html>

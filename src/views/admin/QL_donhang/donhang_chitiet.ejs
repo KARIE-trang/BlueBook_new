@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Đơn Hàng - BlueBook Admin</title>
+
+    <link rel="stylesheet" href="/admin/css/home.css" />
+    <link rel="stylesheet" href="/admin/css/QL_donhang/donhang_chitiet.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo-text">BlueBook</span>
+      </div>
+
+      <div class="logo-divider"></div>
+
+      <nav class="menu">
+        <a href="/admin/home" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <div class="menu-group">
+          <button class="menu-item dropdown-btn">
+            <div class="menu-left">
+              <i class="fa-solid fa-book"></i>
+              <span>Sách</span>
+            </div>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </button>
+
+          <div class="dropdown">
+            <a href="/admin/quanlysach" class="menu-sub">
+              <i class="fa-solid fa-list"></i> Danh sách sách
+            </a>
+            <a href="/admin/theloai" class="menu-sub">
+              <i class="fa-solid fa-shapes"></i> Thể loại
+            </a>
+            <a href="/admin/thongke-tonkho" class="menu-sub">
+              <i class="fa-solid fa-chart-column"></i> Thống kê tồn kho
+            </a>
+          </div>
+        </div>
+
+        <a href="/quanlykhachhang" class="menu-item">
+          <i class="fa-solid fa-users"></i> Khách hàng
+        </a>
+
+        <a href="/admin/quanlydonhang" class="menu-item active">
+          <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+        </a>
+
+        <a href="/admin/doanhthu?preset=today" class="menu-item">
+          <i class="fa-solid fa-coins"></i> Doanh thu
+        </a>
+
+        <a href="/logout" class="menu-item logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </a>
+      </nav>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="top-right">
+        <div class="user-box">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">Admin</span>
+          <span class="role">Quản trị viên</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <h1 class="page-title">Chi Tiết Đơn Hàng</h1>
+      <p class="page-subtitle">
+        Xem toàn bộ thông tin và sản phẩm thuộc đơn hàng này.
+      </p>
+
+      <div class="detail-layout">
+        <!-- LEFT -->
+        <aside class="left-card">
+          <h2 class="section-title">Thông Tin Đơn</h2>
+          <div class="info-block">
+            <p>
+              <strong>Mã đơn:</strong>
+              <span>#<%= thongtindon.madonhang %></span>
+            </p>
+            <p>
+              <strong>Ngày đặt:</strong>
+              <span
+                ><%= new Date(thongtindon.ngaymua).toLocaleDateString('vi-VN')
+                %></span
+              >
+            </p>
+            <p>
+              <strong>Trạng thái:</strong>
+              <% if (thongtindon.trangthai === "MOI") { %>
+              <span class="status new">Mới</span>
+              <% } else if (thongtindon.trangthai === "HUY") { %>
+              <span class="status cancel">Hủy</span>
+              <% } else { %>
+              <span class="status done">Hoàn thành</span>
+              <% } %>
+            </p>
+            <p>
+              <strong>Ghi chú:</strong>
+              <span><%= thongtindon.ghichu || "Không có" %></span>
+            </p>
+          </div>
+
+          <div class="divider"></div>
+
+          <h2 class="section-title">Thông Tin Giao Hàng</h2>
+          <div class="info-block">
+            <p>
+              <strong>Người nhận:</strong>
+              <span><%= thongtindon.tennguoinhan %></span>
+            </p>
+            <p>
+              <strong>SĐT:</strong> <span><%= thongtindon.sdt_giao %></span>
+            </p>
+            <p>
+              <strong>Địa chỉ:</strong>
+              <span><%= thongtindon.diachi_giao %></span>
+            </p>
+          </div>
+        </aside>
+
+        <!-- RIGHT -->
+        <main class="right-card">
+          <h2 class="section-title">Sản Phẩm Trong Đơn</h2>
+
+          <% for (let i = 0; i < sanpham.length; i++){ %>
+          <div class="product-item">
+            <img src="/uploads/<%= sanpham[i].hinhanh %>" class="product-img" />
+
+            <div class="product-info">
+              <h3><%= sanpham[i].tensach %></h3>
+              <p>Giá: <%= Number(sanpham[i].gia).toLocaleString('vi-VN') %>đ</p>
+              <p>SL: <%= sanpham[i].soluong %></p>
+            </div>
+
+            <div class="product-total">
+              <%= Number(sanpham[i].gia *
+              sanpham[i].soluong).toLocaleString('vi-VN') %>đ
+            </div>
+          </div>
+          <% } %>
+
+          <div class="total-box">
+            <div class="total-row">
+              <span>Tạm tính:</span>
+              <span
+                ><%= Number(thanhtien.thanhtien).toLocaleString('vi-VN')
+                %>đ</span
+              >
+            </div>
+
+            <div class="total-row">
+              <span>Freeship:</span>
+              <span>0đ</span>
+            </div>
+
+            <div class="total-row final">
+              <span>Tổng cộng:</span>
+              <strong
+                ><%= Number(thanhtien.thanhtien).toLocaleString('vi-VN')
+                %>đ</strong
+              >
+            </div>
+          </div>
+        </main>
+      </div>
+    </main>
+
+    <script>
+      const btn = document.querySelector(".dropdown-btn");
+      const drop = document.querySelector(".dropdown");
+      const arrow = document.querySelector(".arrow");
+
+      btn.addEventListener("click", () => {
+        drop.classList.toggle("show");
+        arrow.classList.toggle("rotate");
+      });
+    </script>
+  </body>
+</html>

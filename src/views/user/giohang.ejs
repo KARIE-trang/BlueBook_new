@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ Hàng - BlueBook</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+    />
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <link rel="stylesheet" href="/users/css/giohang.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <!-- Đã đăng nhập -->
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <!-- Chưa đăng nhập -->
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+
+    <!-- ========== MAIN: GIỎ HÀNG ========== -->
+    <main class="cart-page">
+      <div class="cart-container">
+        <h1 class="cart-title">Giỏ hàng của bạn</h1>
+        <p class="cart-subtitle">
+          Kiểm tra lại sản phẩm trước khi tiến hành đặt hàng.
+        </p>
+
+        <div class="cart-layout">
+          <!-- ==== DANH SÁCH SẢN PHẨM ==== -->
+          <section class="cart-items">
+            <div class="cart-items-header">
+              <div>Sản phẩm</div>
+              <div>Đơn giá</div>
+              <div>Số lượng</div>
+              <div>Thành tiền</div>
+              <div></div>
+            </div>
+            <% if (sanpham.length === 0) { %>
+            <div class="cart-empty">
+              <p class="cart-empty-text">Giỏ hàng của bạn đang trống</p>
+            </div>
+            <% } else { %> <% for (let i = 0 ; i < sanpham.length; i++){ %>
+            <div class="cart-item">
+              <div class="cart-product">
+                <div class="cart-product-img">
+                  <img src="/uploads/<%=sanpham[i].hinhanh%>" alt="Tên sách" />
+                </div>
+                <div class="cart-product-info">
+                  <div class="cart-product-title"><%=sanpham[i].tensach%></div>
+                  <div class="cart-product-author">
+                    <%=sanpham[i].tentacgia%>
+                  </div>
+                  <div class="cart-product-meta">Còn hàng</div>
+                </div>
+              </div>
+
+              <div class="cart-col cart-price">
+                <%=Number(sanpham[i].giaban).toLocaleString("vi-VN")%>đ
+              </div>
+
+              <div class="cart-col">
+                <div class="cart-qty">
+                  <button
+                    type="button"
+                    onclick="window.location.href='/user/sanpham/updatesoluong?masach=<%= sanpham[i].masach %>&magiohang=<%= sanpham[i].magiohang %>&update=giam'"
+                  >
+                    -
+                  </button>
+
+                  <input type="text" value="<%=sanpham[i].soluong%>" />
+                  <button
+                    type="button"
+                    onclick="window.location.href='/user/sanpham/updatesoluong?masach=<%= sanpham[i].masach %>&magiohang=<%= sanpham[i].magiohang %>&update=tang'"
+                  >
+                    +
+                  </button>
+                </div>
+                <%if (error==='het-hang' && sanpham[i].masach == masachloi){ %>
+                <p class="error">Số lượng tồn kho đến giới hạn</p>
+                <% }%>
+              </div>
+
+              <div class="cart-col cart-subtotal">
+                <%=Number(sanpham[i].thanhtien).toLocaleString("vi-VN")%>đ
+              </div>
+
+              <div class="cart-col">
+                <a
+                  class="cart-remove-btn"
+                  title="Xóa"
+                  href="/user/sanpham/xoasanpham/<%=sanpham[i].magiohang%>/<%=sanpham[i].masach%>"
+                >
+                  <i class="fa-solid fa-xmark"></i>
+                </a>
+              </div>
+            </div>
+
+            <% } %> <% } %>
+          </section>
+
+          <!-- ==== TÓM TẮT ĐƠN HÀNG ==== -->
+          <aside class="cart-summary">
+            <div class="cart-summary-title">Tóm tắt đơn hàng</div>
+
+            <div class="summary-row">
+              <span>Tạm tính</span>
+              <span
+                ><%=Number(tongtien.tongtien).toLocaleString("vi-VN")%>đ</span
+              >
+            </div>
+
+            <div class="summary-row">
+              <span>Phí vận chuyển</span>
+              <span>Miễn phí</span>
+            </div>
+
+            <div class="summary-total">
+              <span>Tổng thanh toán</span>
+              <span
+                ><%=Number(tongtien.tongtien).toLocaleString("vi-VN")%>đ</span
+              >
+            </div>
+
+            <p class="cart-note">
+              Giá đã bao gồm VAT. Bạn sẽ nhập thông tin nhận hàng và phương thức
+              thanh toán ở bước tiếp theo.
+            </p>
+
+            <% if (sanpham.length === 0) { %>
+            <button class="btn-checkout" disabled>Giỏ hàng đang trống</button>
+            <% } else { %>
+            <a class="btn-checkout" href="/user/thanhtoan">
+              Tiến hành đặt hàng
+            </a>
+            <% } %>
+            <!-- HẾT PHẦN SỬA -->
+
+            <a href="/sanpham" class="btn-continue">Tiếp tục mua sắm</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========== FOOTER CŨ ========== -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+    >
+
+    <!-- JS NHỎ CHO MENU MOBILE -->
+    <script>
+      const menu = document.querySelector("#menu-bars");
+      const navbar = document.querySelector(".navbar");
+      if (menu) {
+        menu.onclick = () => {
+          menu.classList.toggle("fa-times");
+          navbar.classList.toggle("active");
+        };
+      }
+    </script>
+  </body>
+</html>

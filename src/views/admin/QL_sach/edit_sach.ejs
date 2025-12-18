@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sửa Sách - BlueBook Admin</title>
+
+    <link rel="stylesheet" href="/admin/css/home.css" />
+    <link rel="stylesheet" href="/admin/css/QL_sach/edit_sach.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo-text">BlueBook</span>
+      </div>
+
+      <div class="logo-divider"></div>
+
+      <nav class="menu">
+        <a href="/admin/home" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <div class="menu-group">
+          <button class="menu-item dropdown-btn active">
+            <div class="menu-left">
+              <i class="fa-solid fa-book"></i>
+              <span>Sách</span>
+            </div>
+            <i class="fa-solid fa-chevron-down arrow rotate"></i>
+          </button>
+
+          <div class="dropdown show">
+            <a href="/admin/quanlysach" class="menu-sub">
+              <i class="fa-solid fa-list"></i> Danh sách sách
+            </a>
+            <a href="/admin/theloai" class="menu-sub">
+              <i class="fa-solid fa-shapes"></i> Thể loại
+            </a>
+            <a href="/admin/thongke-tonkho" class="menu-sub">
+              <i class="fa-solid fa-chart-column"></i> Thống kê tồn kho
+            </a>
+          </div>
+        </div>
+
+        <a href="/quanlykhachhang" class="menu-item">
+          <i class="fa-solid fa-users"></i> Khách hàng
+        </a>
+
+        <a href="/admin/quanlydonhang" class="menu-item">
+          <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+        </a>
+
+        <a href="/admin/doanhthu?preset=today" class="menu-item">
+          <i class="fa-solid fa-coins"></i> Doanh thu
+        </a>
+
+        <a href="/logout" class="menu-item logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </a>
+      </nav>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="top-right">
+        <div class="user-box">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">Admin</span>
+          <span class="role">Quản trị viên</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- header nhỏ -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Sửa Thông Tin Sách</h1>
+          <p class="page-subtitle">
+            Chỉnh sửa thông tin sách #<%= sach.masach %> trong hệ thống.
+          </p>
+        </div>
+
+        <a class="back-link" href="/admin/quanlysach">
+          <i class="fa-solid fa-arrow-left"></i> Quay về danh sách
+        </a>
+      </div>
+
+      <!-- layout 2 cột: form + card -->
+      <div class="edit-layout">
+        <!-- FORM TRÁI -->
+        <form class="edit-form" method="post" enctype="multipart/form-data">
+          <h2 class="form-title">
+            <i class="fa-solid fa-pen-to-square"></i> Thông tin sách
+          </h2>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Tên Sách <span class="required">*</span></label>
+              <input
+                type="text"
+                name="tensach"
+                value="<%= sach.tensach %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Tác Giả <span class="required">*</span></label>
+              <input
+                type="text"
+                name="tentacgia"
+                value="<%= sach.tentacgia %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Ngày phát hành <span class="required">*</span></label>
+              <input
+                type="date"
+                name="ngayphathanh"
+                value="<%= sach.ngayphathanh %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Giá bán (VNĐ) <span class="required">*</span></label>
+              <input
+                type="text"
+                name="giaban"
+                value="<%= sach.giaban %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Số lượng tồn kho <span class="required">*</span></label>
+              <input
+                type="text"
+                name="sl_tonkho"
+                value="<%= sach.sl_tonkho %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Thể Loại <span class="required">*</span></label>
+              <select name="matheloai" required>
+                <option value="<%= sach.matheloai %>" selected>
+                  <%= sach.tentheloai %>
+                </option>
+                <% for (let i = 0; i < theloai.length; i++) { if
+                (theloai[i].matheloai != sach.matheloai) { %>
+                <option value="<%= theloai[i].matheloai %>">
+                  <%= theloai[i].tentheloai %>
+                </option>
+                <% }} %>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label>Mô tả</label>
+              <textarea rows="4" name="mota"><%= sach.mota %></textarea>
+            </div>
+
+            <div class="form-group full">
+              <label>Đổi ảnh bìa</label>
+
+              <label class="upload-btn">
+                <i class="fa-solid fa-upload"></i> Chọn ảnh mới
+                <input
+                  type="file"
+                  name="hinhanh"
+                  accept="image/*"
+                  id="hinhanh"
+                />
+              </label>
+
+              <div id="preview-box">
+                <img id="preview-img" alt="Preview" />
+              </div>
+
+              <!-- giữ ảnh cũ -->
+              <input
+                type="hidden"
+                name="oldImage"
+                value="<%= sach.hinhanh %>"
+              />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a href="/admin/quanlysach" class="btn-secondary">
+              <i class="fa-solid fa-xmark"></i> Hủy
+            </a>
+            <button class="btn-primary">
+              <i class="fa-regular fa-floppy-disk"></i> Cập nhật
+            </button>
+          </div>
+        </form>
+
+        <!-- CARD PHẢI -->
+        <aside class="book-card">
+          <div class="book-img-wrapper">
+            <img src="/uploads/<%= sach.hinhanh %>" class="book-img" />
+          </div>
+
+          <h2 class="book-name"><%= sach.tensach %></h2>
+          <p class="book-author"><b>Tác giả: </b><%= sach.tentacgia %></p>
+
+          <div class="info-box">
+            <p><b>Mã sách:</b> <%= sach.masach %></p>
+            <p><b>Thể loại:</b> <%= sach.tentheloai %></p>
+            <p><b>Tồn kho:</b> <%= sach.sl_tonkho %></p>
+            <p><b>Giá bán:</b> <%= sach.giaban %> VNĐ</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- SCRIPT PREVIEW + DROPDOWN -->
+    <script>
+      // preview ảnh bìa mới
+      const inputImage = document.getElementById("hinhanh");
+      const previewBox = document.getElementById("preview-box");
+      const previewImg = document.getElementById("preview-img");
+
+      if (inputImage) {
+        inputImage.addEventListener("change", function () {
+          const file = this.files[0];
+          if (file) {
+            const imgURL = URL.createObjectURL(file);
+            previewImg.src = imgURL;
+            previewBox.style.display = "block";
+          } else {
+            previewBox.style.display = "none";
+          }
+        });
+      }
+
+      // dropdown sách
+      const btn = document.querySelector(".dropdown-btn");
+      const drop = document.querySelector(".dropdown");
+      const arrow = document.querySelector(".arrow");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          drop.classList.toggle("show");
+          arrow.classList.toggle("rotate");
+        });
+      }
+    </script>
+  </body>
+</html>

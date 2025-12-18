@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đổi Mật Khẩu - BlueBook</title>
+
+    <!-- Icon + Font -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <!-- CSS account (đã có profile + orders) -->
+    <link rel="stylesheet" href="/users/css/edit_profile.css" />
+  </head>
+
+  <body>
+    <!-- ============= HEADER GIỮ NGUYÊN ============= -->
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <!-- Đã đăng nhập -->
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <!-- Chưa đăng nhập -->
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+
+    <main class="account-page">
+      <div class="account-container">
+        <div class="account-layout">
+          <aside class="account-sidebar">
+            <div class="account-user">
+              <div class="account-avatar-img">
+                <img src="/admin/img/avt.png" alt="Avatar BlueBook" />
+              </div>
+              <div class="account-user-text">
+                <p class="account-name">Nguyễn Thị Trang</p>
+                <p class="account-username">Trang123</p>
+                <button class="account-edit-link" type="button">
+                  <i class="fa-solid fa-pen"></i> Sửa hồ sơ
+                </button>
+              </div>
+            </div>
+
+            <nav class="account-menu">
+              <p class="account-menu-title">Tài Khoản Của Tôi</p>
+              <a href="/edit_profile" class="account-menu-item">Hồ sơ</a>
+              <a href="/user/donmua" class="account-menu-item">Đơn mua</a>
+              <a href="/user/doimatkhau" class="account-menu-item active">
+                Đổi mật khẩu
+              </a>
+            </nav>
+          </aside>
+
+          <!-- ========== FORM ĐỔI MẬT KHẨU ========== -->
+          <section class="account-main">
+            <div class="password-card">
+              <div class="password-header">
+                <h1>Đổi Mật Khẩu</h1>
+                <p>
+                  Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho bất
+                  kỳ ai.
+                </p>
+              </div>
+
+              <div class="password-content">
+                <!-- sửa action theo route backend của m -->
+                <form
+                  class="password-form"
+                  method="POST"
+                  action="/user/doimatkhau"
+                >
+                  <!-- mật khẩu hiện tại -->
+                  <div class="profile-row">
+                    <label class="profile-label">Mật khẩu hiện tại</label>
+                    <div class="profile-input-wrap">
+                      <input
+                        type="password"
+                        name="matkhauhientai"
+                        class="profile-input"
+                        placeholder="Nhập mật khẩu đang sử dụng"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <!-- mật khẩu mới -->
+                  <div class="profile-row">
+                    <label class="profile-label">Mật khẩu mới</label>
+                    <div class="profile-input-wrap">
+                      <input
+                        type="password"
+                        name="matkhaumoi"
+                        class="profile-input"
+                        placeholder="Tối thiểu 6 ký tự"
+                        minlength="6"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <!-- xác nhận mật khẩu mới -->
+                  <div class="profile-row">
+                    <label class="profile-label">Nhập lại mật khẩu</label>
+                    <div class="profile-input-wrap">
+                      <input
+                        type="password"
+                        name="nhaplaimatkhau"
+                        class="profile-input"
+                        placeholder="Nhập lại mật khẩu mới"
+                        minlength="6"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <!-- ghi chú nhỏ -->
+                  <div class="password-note-row">
+                    <div class="profile-label"></div>
+                    <div class="profile-input-wrap">
+                      <p class="password-note">
+                        * Mật khẩu nên chứa chữ hoa, chữ thường và số để tăng độ
+                        an toàn.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- nút -->
+                  <div class="profile-row profile-row-actions">
+                    <label class="profile-label"></label>
+                    <div class="profile-input-wrap">
+                      <button type="submit" class="btn-save">
+                        Lưu thay đổi
+                      </button>
+                    </div>
+                  </div>
+                  <% if (success === "thanhcong") { %>
+                  <div class="alert alert-success">Đổi mật khẩu thành công</div>
+                  <% } %> <% if (error === "matkhaukhongkhop") { %>
+                  <div class="alert alert-error">
+                    Mật khẩu nhập lại không khớp
+                  </div>
+                  <% } %> <% if (error === "matkhaucusai") { %>
+                  <div class="alert alert-error">
+                    Mật khẩu hiện tại không đúng
+                  </div>
+                  <% } %>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============= FOOTER GIỮ NGUYÊN ============= -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,642 @@
+:root {
+  --pink-main: #eb689f;
+  --black: #222;
+  --light-text: #757575;
+  --border: #e5e5e5;
+  --bg-page: #f5f5f5;
+  --bg-card: #ffffff;
+  --radius: 4px;
+  --radius-card: 12px;
+  --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* ============= WRAPPER TRANG TÀI KHOẢN ============= */
+
+.account-page {
+  padding: 9.5rem 0 3rem;
+  background: var(--bg-page);
+  font-family: "Nunito", sans-serif;
+}
+
+.account-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+/* layout 2 cột */
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 2rem;
+}
+
+/* ============= SIDEBAR BÊN TRÁI ============= */
+
+.account-sidebar {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  padding: 1.6rem 1.6rem 2rem;
+  box-sizing: border-box;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* info user trên cùng sidebar */
+.account-user {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+/* avatar dùng ảnh */
+.account-avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.account-avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.account-user-text {
+  flex: 1;
+}
+
+.account-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.2rem;
+}
+
+.account-username {
+  font-size: 1.3rem;
+  color: var(--light-text);
+}
+
+/* link "Sửa hồ sơ" */
+.account-edit-link {
+  margin-top: 0.4rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 1.25rem;
+  color: var(--pink-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.account-edit-link i {
+  font-size: 1.2rem;
+}
+
+/* menu bên trái */
+.account-menu {
+  margin-top: 1.2rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1.2rem;
+}
+
+.account-menu-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+
+.account-menu-item {
+  display: block;
+  font-size: 1.35rem;
+  color: #333;
+  padding: 0.7rem 0;
+  text-decoration: none;
+  transition: color 0.15s, transform 0.1s;
+}
+
+.account-menu-item:hover {
+  color: var(--pink-main);
+  transform: translateX(2px);
+}
+
+.account-menu-item.active {
+  color: var(--pink-main);
+  font-weight: 700;
+}
+
+/* ============= PHẦN BÊN PHẢI (CARD CHUNG) ============= */
+
+.account-main {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  padding: 2rem 2.4rem 2.4rem;
+  box-sizing: border-box;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* hover effect cho 2 card */
+.account-sidebar:hover,
+.account-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ============= HỒ SƠ ============= */
+
+.profile-card {
+  width: 100%;
+}
+
+.profile-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.profile-header p {
+  font-size: 1.35rem;
+  color: var(--light-text);
+  margin-bottom: 1.8rem;
+}
+
+.profile-content {
+  padding-top: 1.4rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.profile-form {
+  width: 100%;
+}
+
+.profile-fields {
+  width: 100%;
+}
+
+.profile-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.4rem;
+}
+
+.profile-label {
+  width: 140px;
+  padding-top: 0.8rem;
+  font-size: 1.35rem;
+  color: #555;
+}
+
+.profile-input-wrap {
+  flex: 1;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid #cfcfcf;
+  font-size: 1.4rem;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.profile-input:focus {
+  border-color: var(--pink-main);
+  box-shadow: 0 0 0 1px rgba(235, 104, 159, 0.2);
+}
+
+.input-readonly {
+  background: #f5f5f5;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.input-readonly:focus {
+  box-shadow: none;
+  border-color: #cfcfcf;
+}
+
+.profile-help {
+  margin-top: 0.4rem;
+  font-size: 1.25rem;
+  color: var(--light-text);
+}
+
+.profile-row-actions .profile-label {
+  padding-top: 0;
+}
+
+.btn-save {
+  min-width: 90px;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--pink-main);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.05s, box-shadow 0.1s;
+}
+
+.btn-save:hover {
+  background: #e35393;
+  box-shadow: 0 2px 6px rgba(235, 104, 159, 0.5);
+}
+
+.btn-save:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* ============= ĐỔI MẬT KHẨU ============= */
+
+.password-card {
+  width: 100%;
+}
+
+.password-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.password-header p {
+  font-size: 1.35rem;
+  color: var(--light-text);
+  margin-bottom: 1.8rem;
+}
+
+.password-content {
+  padding-top: 1.4rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.password-note-row {
+  margin-top: -0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.password-note {
+  font-size: 1.25rem;
+  color: var(--light-text);
+}
+
+/* ============= ĐƠN MUA ============= */
+
+.orders-card {
+  width: 100%;
+}
+
+.orders-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.orders-header p {
+  font-size: 1.35rem;
+  color: var(--light-text);
+  margin-bottom: 1.6rem;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.orders-empty {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 1rem;
+  border: 1px dashed #e8e8e8;
+  border-radius: 10px;
+  color: var(--light-text);
+  font-size: 1.3rem;
+}
+
+.orders-empty i {
+  color: var(--pink-main);
+}
+
+.order-item {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  padding: 1.4rem 1.6rem 1.2rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.order-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid #f3f3f3;
+  margin-bottom: 1rem;
+}
+
+.order-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.order-code {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.order-date {
+  font-size: 1.3rem;
+  color: var(--light-text);
+}
+
+/* status pill */
+.order-status {
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: #f3f4f6;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.order-status.status-cho-xu-ly {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.25);
+  color: #f97316;
+}
+
+.order-status.status-dang-giao {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.25);
+  color: #2563eb;
+}
+
+.order-status.status-hoan-thanh {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(22, 163, 74, 0.25);
+  color: #16a34a;
+}
+
+.order-status.status-huy {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+}
+
+.order-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.order-product {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.6rem 0;
+}
+
+.order-product + .order-product {
+  border-top: 1px dashed #f0f0f0;
+}
+
+.order-product-thumb {
+  width: 64px;
+  height: 86px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f5;
+  border: 1px solid #eee;
+}
+
+.order-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-product-info {
+  overflow: hidden;
+}
+
+.order-product-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-product-meta {
+  font-size: 1.25rem;
+  color: var(--light-text);
+}
+
+.order-product-price {
+  text-align: right;
+}
+
+.order-product-price .price {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.order-item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f3f3;
+}
+
+.order-total {
+  font-size: 1.35rem;
+  color: #444;
+}
+
+.order-total-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--pink-main);
+  margin-left: 0.5rem;
+}
+
+.order-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-outline-sm,
+.btn-primary-sm {
+  font-size: 1.3rem;
+  border-radius: 999px;
+  padding: 0.55rem 1.25rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.05s;
+  text-decoration: none;
+  font-family: "Nunito", sans-serif;
+}
+
+.btn-primary-sm {
+  border-color: var(--pink-main);
+  background: var(--pink-main);
+  color: #fff;
+}
+
+.btn-primary-sm:hover {
+  background: #e35393;
+}
+
+.btn-primary-sm:active {
+  transform: translateY(1px);
+}
+
+/* ============= ALERT MESSAGE ============= */
+.alert {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.alert-success {
+  background-color: #e9f7ef;
+  color: #1e7e34;
+  border: 1px solid #b7ebc6;
+  text-align: center;
+  margin-left: 140px;
+}
+
+.alert-error {
+  background-color: #fdecea;
+  color: #b02a37;
+  border: 1px solid #f5c2c7;
+  text-align: center;
+  margin-left: 140px;
+}
+
+/* ============= RESPONSIVE ============= */
+
+@media (max-width: 992px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .account-main {
+    padding: 1.8rem 1.6rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .account-page {
+    padding: 8.5rem 0 2.5rem;
+  }
+
+  .profile-row {
+    flex-direction: column;
+  }
+
+  .profile-label {
+    width: 100%;
+    padding-top: 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .btn-save {
+    width: 100%;
+    text-align: center;
+  }
+
+  .order-item-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .order-product {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .order-product-thumb {
+    width: 56px;
+    height: 76px;
+  }
+
+  .order-product-price {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .order-item-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-main {
+    padding: 1.6rem 1.2rem 1.8rem;
+  }
+
+  .account-sidebar {
+    padding: 1.4rem 1.2rem 1.6rem;
+  }
+
+  .account-avatar-img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.account-name,
+.account-username,
+.profile-input {
+  text-transform: none !important;
+}

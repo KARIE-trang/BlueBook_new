@@ -1,0 +1,131 @@
+.main {
+  margin-left: 260px;
+  padding: 40px;
+  background: #f5f7ff;
+  min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+}
+
+/* HEADER */
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-header .title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #333;
+}
+
+.page-header .subtitle {
+  font-size: 15px;
+  margin-top: 3px;
+  color: #666;
+}
+
+/* FORM CARD */
+.form-card {
+  background: white;
+  padding: 30px;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 1px solid #cdd3f3;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #4d6bff;
+  box-shadow: 0 0 0 3px rgba(77, 107, 255, 0.18);
+}
+
+/* ERROR */
+.error-msg {
+  background: #ffe1e1;
+  color: #c0392b;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* BUTTONS */
+.form-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+}
+
+.save-btn,
+.reset-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-btn {
+  background: #4d6bff;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #3f57d1;
+}
+
+.reset-btn {
+  background: #e1e4f6;
+  color: #333;
+}
+
+.reset-btn:hover {
+  background: #d3d8ee;
+}
+/* Căn giữa form thêm thể loại */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* căn giữa ngang */
+  padding-top: 40px;
+}
+
+.page-header {
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Căn giữa form card */
+.form-card {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+}

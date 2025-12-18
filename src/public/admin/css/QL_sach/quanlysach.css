@@ -1,0 +1,223 @@
+/* ========== CỐ ĐỊNH BỐ CỤC CHUNG ========== */
+
+.main {
+  padding: 30px 40px;
+  font-family: "Nunito", sans-serif;
+}
+
+/* ========== TIÊU ĐỀ TRANG ========== */
+.page-header {
+  margin-bottom: 25px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 15px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #3f51b5;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4d6bff;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.add-btn:hover {
+  background: #3c55d6;
+}
+
+/* ========== TABLE CARD ========== */
+.table-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+
+.book-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.book-table thead tr {
+  background: #f4f6ff;
+}
+
+.book-table th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.book-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+/* ảnh sách */
+.img-thumb {
+  width: 55px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* giá */
+.gia {
+  font-weight: 700;
+  color: #2e39a5;
+}
+
+/* Tên sách dài */
+.ten-sach {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========== HÀNH ĐỘNG ========== */
+.action-col {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf0ff;
+  color: #4d6bff;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-decoration: none;
+}
+
+.action-btn.edit:hover {
+  background: #dce3ff;
+}
+
+.action-btn.delete {
+  color: #ff4d4f;
+  background: #ffecec;
+}
+
+.action-btn.delete:hover {
+  background: #ffdbdb;
+}
+
+/* === Fix lệch nút thao tác === */
+.book-table td:last-child {
+  width: 130px;
+  text-align: center;
+}
+
+/* ========== HOVER ROWS ========== */
+.book-table tbody tr:hover {
+  background: #f8f9ff;
+  transition: 0.15s ease;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 900px) {
+  .ten-sach {
+    max-width: 140px;
+  }
+
+  .book-table th,
+  .book-table td {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+/* Căn giữa tiêu đề */
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+}
+
+/* Subtitle */
+.page-header .subtitle {
+  text-align: center;
+  color: #666;
+  margin-top: 6px;
+  margin-bottom: 18px;
+}
+
+/* Nút thêm sách bên trái */
+.btn-left {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* ĐẨY TRÁI */
+  margin-top: 10px;
+}
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4d6bff;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.add-btn:hover {
+  background: #3c55d6;
+}
+tr,
+td,
+th {
+  text-align: center !important;
+}
+/* nút ẨN */
+.action-btn.show {
+  background: #fff3cd;
+  color: #d39e00;
+}
+
+.action-btn.show:hover {
+  background: #ffe8a1;
+}
+
+/* nút HIỆN */
+.action-btn.hide {
+  background: #d4edda;
+  color: #1b7c38;
+}
+
+.action-btn.hide:hover {
+  background: #c3e6cb;
+}

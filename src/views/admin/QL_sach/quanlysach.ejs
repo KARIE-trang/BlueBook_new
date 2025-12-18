@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lý Sách - BlueBook</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="/admin/css/home.css" />
+    <link rel="stylesheet" href="/admin/css/QL_sach/quanlysach.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo-text">BlueBook</span>
+      </div>
+
+      <div class="logo-divider"></div>
+
+      <nav class="menu">
+        <a href="/admin/home" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <div class="menu-group">
+          <button class="menu-item dropdown-btn active">
+            <div class="menu-left">
+              <i class="fa-solid fa-book"></i>
+              <span>Sách</span>
+            </div>
+            <i class="fa-solid fa-chevron-down arrow rotate"></i>
+          </button>
+
+          <div class="dropdown show">
+            <a href="/admin/quanlysach" class="menu-sub active"
+              ><i class="fa-solid fa-list"></i> Danh sách sách</a
+            >
+            <a href="/admin/theloai" class="menu-sub"
+              ><i class="fa-solid fa-shapes"></i> Thể loại</a
+            >
+            <a href="/admin/thongke-tonkho" class="menu-sub"
+              ><i class="fa-solid fa-chart-column"></i> Thống kê tồn kho</a
+            >
+          </div>
+        </div>
+
+        <a href="/quanlykhachhang" class="menu-item">
+          <i class="fa-solid fa-users"></i> Khách hàng
+        </a>
+
+        <a href="/admin/quanlydonhang" class="menu-item">
+          <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+        </a>
+
+        <a href="/admin/doanhthu?preset=today" class="menu-item">
+          <i class="fa-solid fa-coins"></i> Doanh thu
+        </a>
+
+        <a href="/logout" class="menu-item logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </a>
+      </nav>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="top-right">
+        <div class="user-box">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">Admin</span>
+          <span class="role">Quản trị viên</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="page-header">
+        <h1 class="title">QUẢN LÝ SÁCH</h1>
+        <p class="subtitle">Danh sách toàn bộ sách trong hệ thống BlueBook</p>
+
+        <div class="btn-right">
+          <a href="/admin/add_book" class="add-btn">
+            <i class="fa-solid fa-plus"></i> Thêm Sách Mới
+          </a>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="book-table">
+          <thead>
+            <tr>
+              <th>Ảnh</th>
+              <th>Mã</th>
+              <th>Tên Sách</th>
+              <th>Tác Giả</th>
+              <th>Thể Loại</th>
+              <th>Giá</th>
+              <th>Tồn Kho</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% sach.forEach((s) => { %>
+            <tr>
+              <td><img src="/uploads/<%= s.hinhanh %>" class="img-thumb" /></td>
+
+              <td><%= s.masach %></td>
+
+              <td class="ten-sach"><%= s.tensach %></td>
+
+              <td><%= s.tentacgia %></td>
+
+              <td><%= s.tentheloai %></td>
+
+              <td class="gia">
+                <%= Number(s.giaban).toLocaleString("vi-VN") %>đ
+              </td>
+
+              <td><%= s.sl_tonkho %></td>
+
+              <td>
+                <div class="action-col">
+                  <!-- Sửa -->
+                  <a
+                    href="/admin/edit_book/<%= s.masach %>"
+                    class="action-btn edit"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </a>
+
+                  <!-- HIỂN / ẨN -->
+                  <% if (s.trangthai_sach.trim() === "HIEN") { %>
+                  <!-- Sách đang HIỂN → icon MẮT MỞ → action là HIDE -->
+                  <a
+                    href="/admin/hide_book/<%= s.masach %>"
+                    class="action-btn hide"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <% } else { %>
+                  <!-- Sách đang ẨN → icon MẮT GẠCH → action là SHOW -->
+                  <a
+                    href="/admin/show_book/<%= s.masach %>"
+                    class="action-btn show"
+                  >
+                    <i class="fa-solid fa-eye-slash"></i>
+                  </a>
+                  <% } %>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script>
+      const btn = document.querySelector(".dropdown-btn");
+      const drop = document.querySelector(".dropdown");
+      const arrow = document.querySelector(".arrow");
+
+      btn.addEventListener("click", () => {
+        drop.classList.toggle("show");
+        arrow.classList.toggle("rotate");
+      });
+    </script>
+  </body>
+</html>

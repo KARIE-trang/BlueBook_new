@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh Toán - BlueBook</title>
+
+    <!-- FONT & ICON -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS chung user -->
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <!-- CSS riêng thanh toán -->
+    <link rel="stylesheet" href="/users/css/thanhtoan.css" />
+  </head>
+
+  <body>
+    <!-- ========================== HEADER GIỮ NGUYÊN ========================== -->
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a href="/user/giohang" class="fas fa-shopping-cart"></a>
+        <a href="/edit_profile" class="fas fa-user"></a>
+        <a href="/logout" class="fas fa-right-from-bracket"></a>
+      </div>
+    </header>
+
+    <!-- ========================== MAIN: THANH TOÁN ========================== -->
+    <main class="checkout-page">
+      <div class="checkout-container">
+        <h1 class="checkout-title">Thanh Toán Đơn Hàng</h1>
+        <p class="checkout-sub">Vui lòng nhập thông tin nhận hàng của bạn.</p>
+
+        <div class="checkout-layout">
+          <!-- ================== CỘT TRÁI: THÔNG TIN ================== -->
+          <section class="checkout-info">
+            <h2>Thông Tin Nhận Hàng</h2>
+
+            <form id="formThanhToan" action="/user/postthanhtoan" method="post">
+              <label>Họ Và Tên <span class="batbuoc">*</span></label>
+              <input
+                type="text"
+                placeholder="Nguyễn Văn A"
+                name="tennguoinhan"
+                required
+              />
+
+              <label>Số Điện Thoại <span class="batbuoc">*</span></label>
+              <input
+                type="text"
+                placeholder="0912345678"
+                name="sdt_giao"
+                required
+              />
+
+              <label>Địa Chỉ Giao Hàng <span class="batbuoc">*</span></label>
+              <input
+                type="text"
+                placeholder="168 Mạc Quyết, Dương Kinh, Hải Phòng"
+                name="diachi_giao"
+                required
+              />
+
+              <label>Ghi Chú Thêm</label>
+              <textarea
+                placeholder="Ví dụ: Giao giờ hành chính..."
+                name="ghichu"
+              ></textarea>
+            </form>
+          </section>
+
+          <!-- ================== CỘT PHẢI: ĐƠN HÀNG ================== -->
+          <aside class="checkout-summary">
+            <h2>Đơn Hàng Của Bạn</h2>
+
+            <div class="summary-items">
+              <!-- Sản phẩm 1 -->
+              <% for(let i = 0 ; i < sach.length; i++){ %>
+              <div class="summary-book">
+                <div class="summary-book-left">
+                  <div class="summary-book-img">
+                    <img src="/uploads/<%=sach[i].hinhanh%>" />
+                  </div>
+
+                  <div class="summary-book-info">
+                    <div class="summary-book-title"><%=sach[i].tensach%></div>
+                    <div class="summary-book-qty">
+                      Số lượng: <%=sach[i].soluong%>
+                    </div>
+                    <div class="summary-book-unit">
+                      Giá: <%=Number(sach[i].giaban).toLocaleString("vi-VN")%>đ
+                    </div>
+                  </div>
+                </div>
+
+                <div class="summary-book-price">
+                  <%=Number(sach[i].thanhtien).toLocaleString("vi-VN")%>đ
+                </div>
+              </div>
+              <% } %>
+            </div>
+
+            <div class="summary-row">
+              <span>Tạm Tính</span>
+              <span
+                ><%=Number(tongtien.tongtien).toLocaleString("vi-VN")%>đ</span
+              >
+            </div>
+
+            <div class="summary-row">
+              <span>Phí Vận Chuyển</span>
+              <span>Miễn Phí</span>
+            </div>
+
+            <div class="summary-total">
+              <span>Tổng Thanh Toán</span>
+              <span
+                ><%=Number(tongtien.tongtien).toLocaleString("vi-VN")%>đ</span
+              >
+            </div>
+
+            <button type="submit" form="formThanhToan" class="btn-order">
+              ĐẶT HÀNG
+            </button>
+            <a href="/user/giohang" class="btn-cancel">Hủy bỏ</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========================== FOOTER GIỮ NGUYÊN ========================== -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS MENU -->
+    <script>
+      const menu = document.querySelector("#menu-bars");
+      const navbar = document.querySelector(".navbar");
+      if (menu) {
+        menu.onclick = () => {
+          menu.classList.toggle("fa-times");
+          navbar.classList.toggle("active");
+        };
+      }
+    </script>
+  </body>
+</html>

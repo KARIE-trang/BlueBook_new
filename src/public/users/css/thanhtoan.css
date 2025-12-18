@@ -1,0 +1,278 @@
+/* ================== LAYOUT TRANG THANH TOÁN ================== */
+
+.checkout-page {
+  padding: 7rem 5% 4rem;
+  background: #f5f6fa;
+}
+
+/* Fix font: mọi thứ trong khu vực thanh toán dùng Nunito giống toàn site */
+.checkout-page,
+.checkout-page * {
+  font-family: "Nunito", sans-serif;
+}
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.checkout-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+
+.checkout-sub {
+  color: var(--light-color);
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+}
+
+/* ========== layout 2 cột ========== */
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 2fr 1.1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* ================== CỘT TRÁI: THÔNG TIN ================== */
+
+.checkout-info {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.checkout-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+.checkout-info form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.checkout-info label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.2rem;
+}
+
+.checkout-info input,
+.checkout-info textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.8rem;
+  border: var(--border);
+  font-size: 1.4rem;
+  outline: none;
+  transition: 0.2s;
+  resize: vertical;
+  min-height: 40px;
+}
+
+.checkout-info textarea {
+  min-height: 80px;
+}
+
+.checkout-info input:focus,
+.checkout-info textarea:focus {
+  border-color: var(--pink-main);
+  box-shadow: 0 0 0 1px rgba(235, 104, 159, 0.3);
+}
+
+/* ================== CỘT PHẢI: ĐƠN HÀNG ================== */
+
+.checkout-summary {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.checkout-summary h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+/* danh sách sản phẩm có ảnh */
+
+.summary-items {
+  border-bottom: var(--border);
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-book {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary-book-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary-book-img {
+  width: 70px;
+  height: 95px;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0.25rem 0.8rem rgba(0, 0, 0, 0.15);
+}
+
+.summary-book-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.summary-book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.summary-book-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.summary-book-qty {
+  font-size: 1.3rem;
+  color: var(--light-color);
+}
+
+.summary-book-price {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* dòng tạm tính / phí ship */
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: var(--light-color);
+}
+
+/* tổng thanh toán */
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: var(--border);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--black);
+}
+
+/* nút ĐẶT HÀNG */
+
+.btn-order {
+  margin-top: 1.8rem;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 1rem 1.5rem;
+  border-radius: 999px;
+  background: var(--pink-main);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0.7rem 1.4rem rgba(235, 104, 159, 0.4);
+  transition: 0.2s ease;
+}
+
+.btn-order:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1rem 1.8rem rgba(235, 104, 159, 0.5);
+}
+
+/* ================== RESPONSIVE ================== */
+
+@media (max-width: 992px) {
+  .checkout-page {
+    padding: 7rem 3% 3rem;
+  }
+
+  .checkout-layout {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    order: -1;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout-container {
+    padding: 0 0.4rem;
+  }
+
+  .checkout-info,
+  .checkout-summary {
+    padding: 1.5rem;
+  }
+
+  .checkout-title {
+    font-size: 2rem;
+  }
+}
+.btn-cancel {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  background: #ddd;
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #ccc;
+}
+.summary-book-unit {
+  font-size: 1.3rem;
+  color: var(--light-color);
+}
+.batbuoc {
+  color: red;
+}

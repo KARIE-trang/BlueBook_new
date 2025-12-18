@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết đơn hàng - BlueBook</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <link rel="stylesheet" href="/users/css/chitietdonhang.css" />
+  </head>
+
+  <body>
+    <!-- HEADER GIỮ NGUYÊN -->
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+
+    <main class="od-main">
+      <div class="od-wrap">
+        <!-- HEADER CỦA TRANG (gọn) -->
+        <div class="od-header">
+          <div class="od-header-left">
+            <h1 class="page-title">Chi tiết đơn hàng</h1>
+            <p class="page-subtitle">
+              Mã đơn: <b>#<%= thongtindon.madonhang %></b>
+              <span class="dot">•</span>
+              Ngày đặt: <b><%= thongtindon.ngaymua %></b>
+            </p>
+          </div>
+
+          <a class="back-link" href="/user/donmua">
+            <i class="fa-solid fa-arrow-left"></i>
+            Quay lại đơn hàng
+          </a>
+        </div>
+
+        <div class="layout">
+          <!-- LEFT -->
+          <aside class="card left">
+            <h2 class="section-title">Thông tin đơn</h2>
+
+            <div class="info">
+              <p>
+                <strong>Trạng thái:</strong>
+                <% if (thongtindon.trangthai === "MOI") { %>
+                <span class="status new">Mới</span>
+                <% } else if (thongtindon.trangthai === "HUY") { %>
+                <span class="status cancel">Hủy</span>
+                <% } else if (thongtindon.trangthai === "HOAN_THANH") { %>
+                <span class="status done">Hoàn thành</span>
+                <% } else { %>
+                <span class="status wait"><%= thongtindon.trangthai %></span>
+                <% } %>
+              </p>
+
+              <p>
+                <strong>Ghi chú:</strong>
+                <span><%= thongtindon.ghichu || "Không có" %></span>
+              </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2 class="section-title">Thông tin nhận hàng</h2>
+
+            <div class="info">
+              <p>
+                <strong>Người nhận:</strong>
+                <span><%= thongtindon.tennguoinhan %></span>
+              </p>
+              <p>
+                <strong>SĐT:</strong>
+                <span><%= thongtindon.sdt_giao %></span>
+              </p>
+              <p class="addr">
+                <strong>Địa chỉ:</strong>
+                <span><%= thongtindon.diachi_giao %></span>
+              </p>
+            </div>
+          </aside>
+
+          <!-- RIGHT -->
+          <section class="card right">
+            <h2 class="section-title">Sản phẩm trong đơn</h2>
+
+            <% for (let i = 0; i < sanpham.length; i++) { %>
+            <div class="product">
+              <img
+                src="/uploads/<%= sanpham[i].hinhanh %>"
+                alt="<%= sanpham[i].tensach %>"
+                class="product-img"
+              />
+
+              <div class="product-info">
+                <h3 class="product-name"><%= sanpham[i].tensach %></h3>
+                <div class="product-meta">
+                  <span
+                    >Giá:
+                    <b
+                      ><%= Number(sanpham[i].gia).toLocaleString('vi-VN') %>đ</b
+                    ></span
+                  >
+                  <span class="dot">•</span>
+                  <span>SL: <b><%= sanpham[i].soluong %></b></span>
+                </div>
+              </div>
+
+              <div class="product-total">
+                <%= Number(sanpham[i].gia *
+                sanpham[i].soluong).toLocaleString('vi-VN') %>đ
+              </div>
+            </div>
+            <% } %>
+
+            <div class="total-box">
+              <div class="total-row">
+                <span>Tạm tính</span>
+                <span
+                  ><%= Number(thanhtien.thanhtien).toLocaleString('vi-VN')
+                  %>đ</span
+                >
+              </div>
+              <div class="total-row">
+                <span>Freeship</span>
+                <span>0đ</span>
+              </div>
+              <div class="total-row final">
+                <span>Tổng cộng</span>
+                <strong
+                  ><%= Number(thanhtien.thanhtien).toLocaleString('vi-VN')
+                  %>đ</strong
+                >
+              </div>
+            </div>
+
+            <div class="actions">
+              <a class="btn btn-outline" href="/user/donmua">
+                <i class="fa-regular fa-rectangle-list"></i> Danh sách đơn
+              </a>
+
+              <% if (thongtindon.trangthai === "MOI") { %>
+              <form
+                action="/donhang/huy/<%= thongtindon.madonhang %>"
+                method="post"
+                class="form-inline"
+              >
+                <button type="submit" class="btn btn-danger">
+                  <i class="fa-solid fa-xmark"></i> Hủy đơn
+                </button>
+              </form>
+              <% } %>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER GIỮ NGUYÊN -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

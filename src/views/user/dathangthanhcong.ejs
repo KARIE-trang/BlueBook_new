@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặt Hàng Thành Công - BlueBook</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <link rel="stylesheet" href="/users/css/dathangthanhcong.css" />
+  </head>
+
+  <body>
+    <!-- Giữ header như bình thường -->
+    <header>
+      <a href="/" class="logo">BlueBook</a>
+      <nav class="navbar">
+        <a href="/">Trang Chủ</a>
+        <a href="/#theloai">Giới Thiệu</a>
+        <a href="/#sachmoi">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+      <div class="icons">
+        <a href="/cart" class="fas fa-shopping-cart"></a>
+        <a href="/login" class="fas fa-user-lock"></a>
+      </div>
+    </header>
+
+    <main class="success-page">
+      <div class="success-box">
+        <div class="icon-wrap">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <h1>Đặt Hàng Thành Công!</h1>
+
+        <p class="subtext">
+          Cảm ơn bạn đã mua sách tại <strong>BlueBook</strong>. Chúng tôi đã
+          tiếp nhận đơn hàng của bạn và sẽ giao trong thời gian sớm nhất!
+        </p>
+
+        <!-- Mã đơn hàng (demo, sau này truyền từ backend) -->
+        <p class="order-id">Mã đơn hàng của bạn: <span><%=madonhang%></span></p>
+
+        <div class="actions">
+          <a href="/user/chitietdonhang/<%=madonhang%>" class="btn-primary"
+            >Xem Chi Tiết Đơn Hàng</a
+          >
+
+          <a href="/" class="btn-outline">
+            <i class="fa-solid fa-arrow-left"></i>
+            Về Trang Chủ
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

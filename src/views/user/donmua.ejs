@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đơn Mua - BlueBook</title>
+
+    <!-- Icon + Font -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <link rel="stylesheet" href="/users/css/edit_profile.css" />
+  </head>
+
+  <body>
+    <!-- ============= HEADER GIỮ NGUYÊN ============= -->
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+
+    <!-- ============= NỘI DUNG ĐƠN MUA ============= -->
+    <main class="account-page">
+      <div class="account-container">
+        <div class="account-layout">
+          <!-- ========== SIDEBAR TRÁI ========== -->
+          <aside class="account-sidebar">
+            <div class="account-user">
+              <div class="account-avatar-img">
+                <img src="/admin/img/avt.png" alt="Avatar BlueBook" />
+              </div>
+              <div class="account-user-text">
+                <p class="account-name"><%= users["hoten"] %></p>
+                <p class="account-username"><%= users["taikhoan"] %></p>
+                <a class="account-edit-link" href="/edit_profile">
+                  <i class="fa-solid fa-pen"></i> Sửa hồ sơ
+                </a>
+              </div>
+            </div>
+
+            <nav class="account-menu">
+              <p class="account-menu-title">Tài Khoản Của Tôi</p>
+              <a href="/edit_profile" class="account-menu-item">Hồ sơ</a>
+              <a href="/user/donmua" class="account-menu-item active"
+                >Đơn mua</a
+              >
+              <a href="/user/doimatkhau" class="account-menu-item"
+                >Đổi mật khẩu</a
+              >
+            </nav>
+          </aside>
+
+          <!-- ========== DANH SÁCH ĐƠN MUA ========== -->
+          <section class="account-main">
+            <div class="orders-card">
+              <div class="orders-header">
+                <h1>Đơn Mua</h1>
+                <p>Xem lại các đơn hàng sách đã đặt trên BlueBook.</p>
+              </div>
+
+              <!-- Danh sách đơn -->
+              <div class="orders-list">
+                <% if (!orders || orders.length === 0) { %>
+                <div class="orders-empty">
+                  <i class="fa-solid fa-box-open"></i>
+                  <p>Chưa có đơn hàng nào.</p>
+                </div>
+                <% } else { %> <% for (let i = 0; i < orders.length; i++) { %>
+                <% let st = (orders[i].trangthai ||
+                "").toString().toUpperCase(); let statusClass =
+                "status-cho-xu-ly"; let statusText = orders[i].trangthai; if (st
+                === "HOAN_THANH") { statusClass = "status-hoan-thanh";
+                statusText = "Đã giao"; } else if (st === "HUY") { statusClass =
+                "status-huy"; statusText = "Đã hủy"; } else if (st ===
+                "DANG_GIAO") { statusClass = "status-dang-giao"; statusText =
+                "Đang giao"; } else { statusClass = "status-cho-xu-ly";
+                statusText = "Chờ xử lý"; } %>
+
+                <article class="order-item">
+                  <div class="order-item-header">
+                    <div class="order-left">
+                      <span class="order-code"
+                        >Mã đơn: #DH<%= orders[i].madonhang %></span
+                      >
+                      <span class="order-date">
+                        Ngày đặt: <%= new
+                        Date(orders[i].ngaymua).toLocaleDateString("vi-VN") %>
+                      </span>
+                    </div>
+                    <span class="order-status <%= statusClass %>"
+                      ><%= statusText %></span
+                    >
+                  </div>
+
+                  <div class="order-item-body">
+                    <% for (let j = 0; j < orders[i].products.length; j++) { %>
+                    <div class="order-product">
+                      <div class="order-product-thumb">
+                        <img
+                          src="/uploads/<%= orders[i].products[j].hinhanh %>"
+                        />
+                      </div>
+                      <div class="order-product-info">
+                        <h3 class="order-product-name">
+                          <%= orders[i].products[j].tensach %>
+                        </h3>
+                        <p class="order-product-meta">
+                          Số lượng: <%= orders[i].products[j].soluong %>
+                        </p>
+                      </div>
+                      <div class="order-product-price">
+                        <span class="price">
+                          <%=
+                          Number(orders[i].products[j].gia).toLocaleString("vi-VN")
+                          %>đ
+                        </span>
+                      </div>
+                    </div>
+                    <% } %>
+                  </div>
+
+                  <div class="order-item-footer">
+                    <div class="order-total">
+                      <span>Tổng số tiền:</span>
+                      <span class="order-total-value">
+                        <%= Number(orders[i].tongtien).toLocaleString("vi-VN")
+                        %>đ
+                      </span>
+                    </div>
+
+                    <div class="order-actions">
+                      <a
+                        href="/user/chitietdonhang/<%= orders[i].madonhang %>"
+                        class="btn-primary-sm"
+                      >
+                        Xem chi tiết
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <% } %> <% } %>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============= FOOTER GIỮ NGUYÊN ============= -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

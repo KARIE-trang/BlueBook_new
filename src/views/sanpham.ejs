@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tất Cả Sách - BlueBook</title>
+
+    <!-- Icon + Font -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <link rel="stylesheet" href="/users/css/sanpham.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+
+    <main class="products-page">
+      <div class="products-header">
+        <div class="products-header-left">
+          <div class="products-header-title">Tất Cả Sách</div>
+          <div class="products-header-sub">
+            Khám phá kho sách phong phú của BlueBook.
+          </div>
+        </div>
+
+        <div class="products-header-right">
+          <div class="products-toolbar">
+            <div class="products-toolbar-left">Đang hiển thị</div>
+
+            <div class="products-toolbar-right">
+              <select id="sort" class="sort-select">
+                <option value="">Sắp xếp mặc định</option>
+                <option value="new">Mới nhất</option>
+                <option value="asc">Giá: thấp đến cao</option>
+                <option value="desc">Giá: cao đến thấp</option>
+              </select>
+
+              <form class="toolbar-search" action="/sanpham" method="GET">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Tìm theo tên sách..."
+                />
+                <button type="submit" title="Tìm kiếm">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-layout">
+        <aside class="filter-sidebar">
+          <h3><i class="fa-solid fa-filter"></i> Lọc sản phẩm</h3>
+
+          <div>
+            <div class="filter-section-title">Thể Loại</div>
+            <ul class="category-list">
+              <li>
+                <a
+                  href="/sanpham?filter=tatca"
+                  class="<%= filter === 'tatca' ? 'active' : '' %>"
+                >
+                  <span>Tất Cả</span>
+                  <span class="count"><%= tongsach.tongsach %></span>
+                </a>
+              </li>
+
+              <% for (let i = 0; i < theloai.length; i++) { %>
+              <li>
+                <a
+                  href="/sanpham?filter=<%= theloai[i].matheloai %>"
+                  class="<%= filter == theloai[i].matheloai ? 'active' : '' %>"
+                >
+                  <span><%= theloai[i].tentheloai %></span>
+                  <span class="count"><%= theloai[i].soluongsach %></span>
+                </a>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="products-content">
+          <% if (!listsach || listsach.length === 0) { %>
+          <div class="no-product">Không tìm thấy sách nào phù hợp.</div>
+          <% } else { %>
+
+          <div class="product-grid">
+            <% for (let i = 0; i < listsach.length; i++) { %>
+
+            <article
+              class="product-card"
+              data-masach="<%= listsach[i].masach %>"
+            >
+              <a
+                class="card-link"
+                href="/sanpham/book/<%= listsach[i].masach %>"
+                aria-label="Xem chi tiết sách"
+              ></a>
+              <div class="product-img-wrapper">
+                <img
+                  src="/uploads/<%= listsach[i].hinhanh %>"
+                  alt="<%= listsach[i].tensach %>"
+                />
+                <span class="product-tag">Mới</span>
+              </div>
+
+              <div class="product-body">
+                <h3 class="product-title"><%= listsach[i].tensach %></h3>
+                <div class="product-author"><%= listsach[i].tentacgia %></div>
+                <div class="product-price-row">
+                  <div class="product-price-main">
+                    <%= Number(listsach[i].giaban).toLocaleString("vi-VN") %>đ
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-actions">
+                <a
+                  class="btn-view"
+                  href="/sanpham/book/<%= listsach[i].masach %>"
+                >
+                  Xem chi tiết
+                </a>
+
+                <% if (listsach[i].sl_tonkho > 0) { %>
+                <form
+                  action="/user/add_giohang/<%= listsach[i].masach %>"
+                  method="POST"
+                >
+                  <input type="hidden" name="source" value="list" />
+                  <button type="submit" class="btn-add" title="Thêm vào giỏ">
+                    <i class="fa-solid fa-cart-plus"></i>
+                  </button>
+                </form>
+                <% } else { %>
+                <button class="btn-add disabled" disabled>Hết hàng</button>
+                <% } %>
+              </div>
+            </article>
+            <% } %>
+          </div>
+
+          <% } %>
+        </section>
+      </div>
+    </main>
+
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const sortSelect = document.getElementById("sort");
+      const grid = document.querySelector(".product-grid");
+
+      function getPriceFromCard(card) {
+        const priceText = card
+          .querySelector(".product-price-main")
+          .innerText.replace(/[^\d]/g, "");
+        return Number(priceText) || 0;
+      }
+
+      function getIdFromCard(card) {
+        return Number(card.getAttribute("data-masach") || 0);
+      }
+
+      sortSelect.addEventListener("change", function () {
+        const value = this.value;
+        const cards = Array.from(grid.querySelectorAll(".product-card"));
+
+        if (value === "") return;
+
+        if (value === "asc") {
+          cards.sort((a, b) => getPriceFromCard(a) - getPriceFromCard(b));
+        } else if (value === "desc") {
+          cards.sort((a, b) => getPriceFromCard(b) - getPriceFromCard(a));
+        } else if (value === "new") {
+          cards.sort((a, b) => getIdFromCard(b) - getIdFromCard(a));
+        }
+
+        cards.forEach((card) => grid.appendChild(card));
+      });
+    </script>
+  </body>
+</html>

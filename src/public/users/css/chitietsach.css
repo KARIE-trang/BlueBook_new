@@ -1,0 +1,331 @@
+/* ===== TRANG CHI TIẾT SÁCH ===== */
+/* Không đụng :root, *, html, body – dùng lại biến trong home.css */
+
+.book-detail-page {
+  padding: 10rem 9% 4rem; /* chừa header fixed */
+  background: #f7f7ff;
+  font-family: "Nunito", sans-serif;
+}
+
+/* ===== BREADCRUMB ===== */
+
+.breadcrumb {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.breadcrumb a {
+  color: var(--light-color);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--pink-main);
+}
+
+.breadcrumb .current {
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* ===== KHỐI CHÍNH: ẢNH + THÔNG TIN ===== */
+
+.book-detail-main {
+  margin-top: 2rem;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  border-radius: 1.6rem;
+  padding: 2.5rem 3rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Cột trái: ảnh sách */
+.book-detail-left {
+  flex: 0 0 38%;
+}
+
+.book-cover-wrapper {
+  border: var(--border);
+  border-radius: 1.2rem;
+  padding: 1.8rem;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-cover-img {
+  width: 100%;
+  max-height: 430px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Cột phải: thông tin */
+.book-detail-right {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 1.2rem;
+}
+
+/* Meta info: tác giả, thể loại, ngày phát hành, mô tả */
+
+.book-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.book-meta-item {
+  font-size: 1.5rem;
+  color: #444;
+}
+
+/* label chung */
+.book-meta-item .label {
+  font-weight: 700;
+  color: #192a56;
+  margin-right: 0.4rem;
+}
+
+/* value chung */
+.book-meta-item .value {
+  color: #444;
+}
+
+/* riêng dòng mô tả: xuống dòng + giãn dòng + giữ xuống dòng trong DB */
+.book-meta-desc {
+  margin-top: 0.4rem;
+}
+
+.book-meta-desc .label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.book-meta-desc .value {
+  display: block;
+  white-space: pre-line; /* GIỮ \n trong DB thành xuống dòng */
+  line-height: 1.8;
+  text-align: justify;
+  color: #444;
+}
+.book-meta-desc .value br + br {
+  text-indent: 2rem;
+}
+/* ===== GIÁ ===== */
+
+.book-price-block {
+  margin-bottom: 2.2rem;
+}
+
+.book-price {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--pink-main);
+}
+
+/* ===== HÀNH ĐỘNG: NÚT ===== */
+
+.book-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  font-size: 1.5rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s;
+}
+
+.btn-primary {
+  background: var(--pink-main);
+  color: #fff;
+}
+
+.btn-primary i {
+  font-size: 1.4rem;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--pink-main);
+  border: 0.1rem solid rgba(235, 104, 159, 0.3);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.12);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 992px) {
+  .book-detail-main {
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .book-detail-left,
+  .book-detail-right {
+    width: 100%;
+    flex: 1 1 auto;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .book-detail-page {
+    padding: 9rem 5% 3rem;
+  }
+
+  .book-detail-main {
+    padding: 1.8rem 1.6rem;
+  }
+
+  .book-title {
+    font-size: 2.1rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    justify-content: center;
+    width: 100%;
+  }
+}
+.book-meta-desc .value {
+  text-transform: none !important;
+}
+/* ===== TOAST SUCCESS ===== */
+.toast-success {
+  position: fixed;
+  top: 90px; /* dưới header */
+  right: 24px;
+  z-index: 9999;
+
+  background: #e9f9f0;
+  color: #1e7f4f;
+
+  padding: 12px 18px;
+  border-left: 5px solid #2ecc71;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  animation: slideIn 0.35s ease, fadeOut 0.5s ease 2.2s forwards;
+}
+
+/* Icon (nếu muốn thêm ✔) */
+.toast-success::before {
+  content: "✔";
+  margin-right: 8px;
+  font-weight: 900;
+}
+
+/* Animation vào */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation biến mất */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+.out-stock {
+  position: fixed;
+  top: 90px; /* dưới header */
+  right: 24px;
+  z-index: 9999;
+
+  background: #fff3f3; /* đỏ nhạt */
+  color: #c0392b; /* đỏ chữ */
+
+  padding: 12px 18px;
+  border-left: 5px solid #e74c3c;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  animation: slideIn 0.35s ease, fadeOut 0.5s ease 2.2s forwards;
+}
+
+/* icon giống kiểu toast */
+.out-stock::before {
+  content: "✖";
+  margin-right: 8px;
+  font-weight: 900;
+}
+
+/* dùng lại keyframes của m (nếu chưa có thì giữ nguyên như toast-success) */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doanh Thu - BlueBook Admin</title>
+
+    <link rel="stylesheet" href="/admin/css/home.css" />
+    <link rel="stylesheet" href="/admin/css/doanhthu.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo-text">BlueBook</span>
+      </div>
+
+      <div class="logo-divider"></div>
+
+      <nav class="menu">
+        <a href="/admin/home" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <div class="menu-group">
+          <button class="menu-item dropdown-btn">
+            <div class="menu-left">
+              <i class="fa-solid fa-book"></i>
+              <span>Sách</span>
+            </div>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </button>
+
+          <div class="dropdown">
+            <a href="/admin/quanlysach" class="menu-sub">
+              <i class="fa-solid fa-list"></i> Danh sách sách
+            </a>
+            <a href="/admin/theloai" class="menu-sub">
+              <i class="fa-solid fa-shapes"></i> Thể loại
+            </a>
+            <a href="/admin/thongke-tonkho" class="menu-sub">
+              <i class="fa-solid fa-chart-column"></i> Thống kê tồn kho
+            </a>
+          </div>
+        </div>
+
+        <a href="/quanlykhachhang" class="menu-item">
+          <i class="fa-solid fa-users"></i> Khách hàng
+        </a>
+
+        <a href="/admin/quanlydonhang" class="menu-item">
+          <i class="fa-solid fa-file-invoice"></i> Đơn hàng
+        </a>
+
+        <a href="/admin/doanhthu?preset=today" class="menu-item active">
+          <i class="fa-solid fa-coins"></i> Doanh thu
+        </a>
+
+        <a href="/logout" class="menu-item logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </a>
+      </nav>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="top-right">
+        <div class="user-box">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">Admin</span>
+          <span class="role">Quản trị viên</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main revenue-page">
+      <!-- HEADER -->
+      <div class="revenue-header">
+        <div>
+          <h1 class="page-title">Doanh Thu</h1>
+          <p class="current-range">
+            Đang xem:
+            <span><%= batdau %></span> – <span><%= ketthuc %></span>
+            <span class="range-tag">
+              <% if (preset === 'today') { %> (Hôm nay) <% } else if (preset ===
+              '7days') { %> (7 ngày qua) <% } else if (preset === 'month') { %>
+              (Tháng này) <% } else if (preset === 'year') { %> (Năm nay) <% }
+              else { %> (Khoảng tùy chỉnh) <% } %>
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- FILTER -->
+      <section class="revenue-filter">
+        <div class="filter-presets">
+          <a
+            href="/admin/doanhthu?preset=today"
+            class="filter-chip <%= preset === 'today' ? 'active' : '' %>"
+          >
+            Hôm nay
+          </a>
+          <a
+            href="/admin/doanhthu?preset=7days"
+            class="filter-chip <%= preset === '7days' ? 'active' : '' %>"
+          >
+            7 ngày qua
+          </a>
+          <a
+            href="/admin/doanhthu?preset=month"
+            class="filter-chip <%= preset === 'month' ? 'active' : '' %>"
+          >
+            Tháng này
+          </a>
+          <a
+            href="/admin/doanhthu?preset=year"
+            class="filter-chip <%= preset === 'year' ? 'active' : '' %>"
+          >
+            Năm nay
+          </a>
+        </div>
+
+        <form class="filter-custom" method="get" action="/admin/doanhthu">
+          <span class="filter-label">
+            <i class="fa-regular fa-calendar"></i> Từ
+          </span>
+          <input type="date" name="from" value="<%= batdau %>" />
+          <span class="filter-label">
+            <i class="fa-regular fa-calendar"></i> Đến
+          </span>
+          <input type="date" name="to" value="<%= ketthuc %>" />
+          <button type="submit" class="apply-btn">
+            <i class="fa-solid fa-filter"></i> Áp dụng
+          </button>
+        </form>
+      </section>
+
+      <!-- KPI CARDS -->
+      <section class="revenue-stats">
+        <div class="stat-card">
+          <div class="stat-icon icon-green">
+            <i class="fa-solid fa-money-bill-wave"></i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Tổng doanh thu</p>
+            <p class="stat-value"><%= doanhthu.doanhthu %>đ</p>
+            <p class="stat-note">Trong khoảng thời gian đã chọn</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-blue">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Đơn đã hoàn thành</p>
+            <p class="stat-value"><%= doanhthu.tongdon %></p>
+            <p class="stat-note">Đơn trạng thái HOÀN THÀNH</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-orange">
+            <i class="fa-solid fa-ban"></i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Đơn bị hủy</p>
+            <p class="stat-value"><%= sodonhuy.sodonhuy %></p>
+            <p class="stat-note">Đơn trạng thái HỦY</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-purple">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Giá trị TB mỗi đơn</p>
+            <p class="stat-value"><%= doanhthu.trungbinhdon %>đ</p>
+            <p class="stat-note">Tổng doanh thu / số đơn hoàn thành</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DETAIL TABLES -->
+      <section class="tables-grid">
+        <!-- CARD 1: ĐƠN HOÀN THÀNH -->
+        <article class="table-card">
+          <div class="table-card-header header-orders">
+            <div class="table-card-title">
+              <i class="fa-solid fa-receipt"></i>
+              <div>
+                <h2>Đơn hàng đã hoàn thành</h2>
+                <p>Trong khoảng thời gian đang chọn</p>
+              </div>
+            </div>
+            <span class="badge-pill"> <%= donhoanthanh.length %> đơn </span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="revenue-table">
+              <thead>
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Ngày mua</th>
+                  <th>Khách hàng</th>
+                  <th class="text-right">Tổng tiền</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (donhoanthanh.length === 0) { %>
+                <tr>
+                  <td colspan="5" class="empty-row">
+                    Không có đơn hoàn thành trong khoảng thời gian này.
+                  </td>
+                </tr>
+                <% } else { %> <% for (let i = 0; i < donhoanthanh.length; i++)
+                { %>
+                <tr>
+                  <td><%= donhoanthanh[i].madonhang %></td>
+                  <td><%= donhoanthanh[i].ngaymua %></td>
+                  <td><%= donhoanthanh[i].taikhoan %></td>
+                  <td class="text-right">
+                    <%= Number(donhoanthanh[i].tongtien).toLocaleString("vi-VN")
+                    %>đ
+                  </td>
+                  <td>
+                    <span class="status-badge status-completed"
+                      >HOÀN THÀNH</span
+                    >
+                  </td>
+                </tr>
+                <% } %> <% } %>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- CARD 2: TOP SÁCH -->
+        <article class="table-card">
+          <div class="table-card-header header-books">
+            <div class="table-card-title">
+              <i class="fa-solid fa-book-open"></i>
+              <div>
+                <h2>Top 5 sách bán chạy</h2>
+                <p>Dựa trên số lượng & doanh thu</p>
+              </div>
+            </div>
+            <span class="badge-pill"> <%= topsachbanchay.length %> sách </span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="revenue-table">
+              <thead>
+                <tr>
+                  <th>Sách</th>
+                  <th>Thể loại</th>
+                  <th class="text-right">Số lượng</th>
+                  <th class="text-right">Doanh thu</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (topsachbanchay.length === 0) { %>
+                <tr>
+                  <td colspan="4" class="empty-row">
+                    Chưa có dữ liệu sách bán chạy trong khoảng này.
+                  </td>
+                </tr>
+                <% } else { %> <% for (let i = 0; i < topsachbanchay.length;
+                i++) { %>
+                <tr>
+                  <td><%= topsachbanchay[i].tensach %></td>
+                  <td><%= topsachbanchay[i].tentheloai %></td>
+                  <td class="text-right"><%= topsachbanchay[i].sl %></td>
+                  <td class="text-right">
+                    <%=
+                    Number(topsachbanchay[i].doanhthu).toLocaleString("vi-VN")
+                    %>đ
+                  </td>
+                </tr>
+                <% } %> <% } %>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- CARD 3: TOP THỂ LOẠI -->
+        <article class="table-card table-card-full">
+          <div class="table-card-header header-categories">
+            <div class="table-card-title">
+              <i class="fa-solid fa-layer-group"></i>
+              <div>
+                <h2>Top 5 thể loại được mua nhiều</h2>
+                <p>Tổng hợp theo số lượng & doanh thu</p>
+              </div>
+            </div>
+            <span class="badge-pill">
+              <%= toptheloaimuanhieu.length %> thể loại
+            </span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="revenue-table">
+              <thead>
+                <tr>
+                  <th>Thể loại</th>
+                  <th class="text-right">Tổng số lượng bán</th>
+                  <th class="text-right">Tổng doanh thu</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (toptheloaimuanhieu.length === 0) { %>
+                <tr>
+                  <td colspan="3" class="empty-row">
+                    Chưa có dữ liệu thể loại trong khoảng này.
+                  </td>
+                </tr>
+                <% } else { %> <% toptheloaimuanhieu.forEach(tl => { %>
+                <tr>
+                  <td><%= tl.tentheloai %></td>
+                  <td class="text-right"><%= tl.tongsl %></td>
+                  <td class="text-right">
+                    <%= Number(tl.doanhthu).toLocaleString("vi-VN") %>đ
+                  </td>
+                </tr>
+                <% }) %> <% } %>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const btn = document.querySelector(".dropdown-btn");
+      const drop = document.querySelector(".dropdown");
+      const arrow = document.querySelector(".arrow");
+
+      if (btn) {
+        btn.addEventListener("click", () => {
+          drop.classList.toggle("show");
+          arrow.classList.toggle("rotate");
+        });
+      }
+    </script>
+  </body>
+</html>

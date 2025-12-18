@@ -1,0 +1,273 @@
+/* ===========================
+   TRANG THÔNG TIN CÁ NHÂN
+   Chỉ áp dụng trong .profile-page
+=========================== */
+
+/* Nền + khoảng cách với header fixed */
+.profile-page {
+  padding: 10rem 6% 4rem;
+  background: #f7f7ff;
+}
+
+/* Fix font + không capitalize lung tung */
+.profile-page,
+.profile-page * {
+  font-family: "Nunito", sans-serif;
+  text-transform: none;
+}
+
+/* Khung chính */
+.profile-container {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* ===== TIÊU ĐỀ CĂN GIỮA ===== */
+.profile-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-title h1 {
+  font-size: 2.2rem;
+  font-weight: 700; /* nhẹ hơn logo */
+  color: var(--black);
+  margin-bottom: 0.3rem;
+}
+
+.profile-title p {
+  font-size: 1.35rem;
+  color: var(--light-color);
+}
+
+/* ===== LAYOUT 2 CARD ===== */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 2.8rem;
+}
+
+/* ===========================
+   CARD 1: SIDEBAR
+=========================== */
+
+.profile-sidebar-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.9rem 1.9rem 2.1rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  align-self: flex-start;
+}
+
+/* user info */
+.profile-user {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.6rem;
+}
+
+.profile-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffe4f3, #e3ecff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.profile-user-text .profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.profile-user-text .profile-username {
+  font-size: 1.3rem;
+  color: var(--light-color);
+}
+
+/* gạch ngăn */
+.profile-sidebar-divider {
+  height: 1px;
+  background: #f0f1ff;
+  margin-bottom: 1rem;
+}
+
+/* menu bên trái */
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-menu-item {
+  position: relative;
+  display: block;
+  padding: 0.85rem 1.3rem;
+  border-radius: 12px;
+  font-size: 1.35rem;
+  color: var(--black);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.profile-menu-item.active {
+  background: #fff0f7;
+  color: var(--pink-main);
+  font-weight: 700;
+}
+
+.profile-menu-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  border-radius: 999px;
+  background: var(--pink-main);
+}
+
+.profile-menu-item:not(.active):hover {
+  background: #f5f7ff;
+}
+
+/* ===========================
+   CARD 2: THÔNG TIN TÀI KHOẢN
+=========================== */
+
+.profile-info-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.4rem 2.8rem 2.6rem;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+}
+
+/* header trong card */
+.profile-info-header h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.profile-info-header p {
+  font-size: 1.35rem;
+  color: var(--light-color);
+  margin-top: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+/* list thông tin */
+.profile-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.profile-info-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #f0f1ff;
+}
+
+.profile-info-row:last-child {
+  border-bottom: none;
+}
+
+.profile-info-label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--light-color);
+}
+
+.profile-info-value {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--black);
+  text-align: right;
+}
+
+/* nút chỉnh sửa ở góc dưới bên phải */
+.profile-info-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* nút chỉnh sửa + icon */
+.btn-profile-edit {
+  padding: 0.9rem 1.9rem;
+  border-radius: 999px;
+  border: 1px solid #ffbcd5;
+  background: #ffe7f0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--pink-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    transform 0.1s ease;
+}
+
+.btn-profile-edit i {
+  font-size: 1.35rem;
+  color: var(--pink-main);
+}
+
+.btn-profile-edit:hover {
+  background: #ffd6e7;
+  border-color: #ffa8c7;
+  transform: translateY(-1px);
+}
+
+/* ghi chú dưới cùng */
+.profile-info-note {
+  margin-top: 1.3rem;
+  font-size: 1.25rem;
+  color: var(--light-color);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar-card {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .profile-info-card {
+    margin: 0 auto;
+  }
+
+  .profile-info-row {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-info-value {
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 9rem 4% 3.5rem;
+  }
+
+  .profile-info-card {
+    padding: 2rem 1.8rem 2.3rem;
+  }
+}

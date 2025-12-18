@@ -1,0 +1,474 @@
+/* ===============================
+   RESET NHẸ & LAYOUT CHUNG
+================================ */
+.revenue-page {
+  padding: 20px 24px;
+  background: #f3f5ff;
+  min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.revenue-header {
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.current-range {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.current-range span {
+  font-weight: 700;
+  color: #111827;
+}
+
+.range-tag {
+  margin-left: 8px;
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+/* ===============================
+   FILTER
+================================ */
+.revenue-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.filter-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-chip {
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.filter-chip:hover {
+  background: #d1d5db;
+}
+
+.filter-chip.active {
+  background: #4f46e5;
+  color: #fff;
+}
+
+.filter-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #4b5563;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.filter-custom input[type="date"] {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.filter-custom input[type="date"]:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px #4f46e533;
+}
+
+.apply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.apply-btn:hover {
+  background: #059669;
+}
+
+/* ===============================
+   KPI CARDS
+================================ */
+.revenue-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  transition: 0.2s;
+  text-align: center !important;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.icon-green {
+  background: #10b981;
+}
+.icon-blue {
+  background: #3b82f6;
+}
+.icon-orange {
+  background: #f59e0b;
+}
+.icon-purple {
+  background: #8b5cf6;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.stat-note {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* ===============================
+   TABLE CARDS GRID
+================================ */
+.tables-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.6fr;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.table-card-full {
+  grid-column: 1 / -1;
+}
+
+/* ===============================
+   TABLE CARD
+================================ */
+.table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 18px 14px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+/* header */
+.table-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-card-title i {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+/* màu icon theo loại */
+.header-orders .table-card-title i {
+  background: #10b981;
+}
+
+.header-books .table-card-title i {
+  background: #3b82f6;
+}
+
+.header-categories .table-card-title i {
+  background: #f97316;
+}
+
+.table-card-title h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.table-card-title p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* badge nhỏ bên phải */
+.badge-pill {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ===============================
+   TABLE STYLE
+================================ */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.revenue-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.revenue-table thead th {
+  background: #f9fafb;
+  font-weight: 700;
+  padding: 9px 10px;
+  border-bottom: 2px solid #e5e7eb;
+  color: #374151;
+}
+
+.revenue-table tbody td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #111827;
+}
+
+/* zebra + hover */
+.revenue-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.revenue-table tbody tr:hover {
+  background: #eef2ff;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 14px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ===============================
+   STATUS BADGE
+================================ */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-cancel {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 1024px) {
+  .revenue-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tables-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-card-full {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .revenue-page {
+    padding: 16px 14px;
+  }
+
+  .revenue-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .revenue-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-card {
+    padding: 14px 12px;
+  }
+
+  .revenue-table {
+    font-size: 13px;
+  }
+}
+td,
+th {
+  text-align: center !important;
+}
+/* ===== FIX: Căn giữa phần chữ của KPI card ===== */
+.stat-card {
+  display: flex;
+  align-items: center; /* icon và text căn giữa theo trục ngang */
+  justify-content: center; /* cân bằng chiều dọc nếu icon cao hơn */
+  gap: 12px;
+  padding: 16px 16px;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ← chữ căn giữa ngang */
+  text-align: center; /* ← nội dung chữ vào giữa */
+  justify-content: center;
+}
+
+.stat-label {
+  text-align: center !important;
+}
+
+.stat-value {
+  text-align: center !important;
+}
+
+.stat-note {
+  text-align: center !important;
+}
+/* ===== KPI CARD MINI SIZE ===== */
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px; /* giảm padding */
+  justify-content: center;
+}
+
+/* ICON nhỏ lại */
+.stat-icon {
+  flex: 0 0 50px; /* giảm kích thước icon */
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px; /* icon nhỏ hơn */
+}
+
+/* TEXT BLOCK nhỏ hơn */
+.stat-content {
+  flex: 0 0 150px; /* giảm chiều ngang text */
+  max-width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px; /* chữ nhỏ lại */
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.stat-note {
+  font-size: 11px;
+  color: #9ca3af;
+}

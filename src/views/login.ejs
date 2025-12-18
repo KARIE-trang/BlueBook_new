@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Đăng nhập</title>
+    <style>
+      body {
+        font-family: Arial;
+        background: #eef1f5;
+      }
+
+      .container {
+        width: 350px;
+        margin: 80px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 6px #aaa;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-size: 15px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        color: white;
+        background: #2a7ae4;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+
+      .text-center {
+        text-align: center;
+        margin-top: 10px;
+      }
+      a {
+        color: #2a7ae4;
+      }
+      p {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Đăng nhập</h2>
+
+      <form action="/login" method="post">
+        <label>Tài khoản</label>
+        <input type="text" name="taikhoan" required />
+
+        <label>Mật khẩu</label>
+        <input type="password" name="matkhau" required />
+        <% if(error){ %>
+        <p>Tai khoan khong ton tai hoac mat khau sai</p>
+        <% } %>
+        <button>Đăng nhập</button>
+      </form>
+
+      <div class="text-center">
+        Chưa có tài khoản? <a href="/register">Đăng ký</a>
+      </div>
+    </div>
+  </body>
+</html>

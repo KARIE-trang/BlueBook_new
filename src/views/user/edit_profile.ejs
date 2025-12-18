@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông Tin Cá Nhân - BlueBook</title>
+
+    <!-- Icon + Font -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <!-- CSS riêng -->
+    <link rel="stylesheet" href="/users/css/edit_profile.css" />
+  </head>
+
+  <body>
+    <!-- ============= HEADER GIỮ NGUYÊN ============= -->
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <!-- Đã đăng nhập -->
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <!-- Chưa đăng nhập -->
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+
+    <!-- ============= NỘI DUNG PROFILE ============= -->
+    <main class="account-page">
+      <div class="account-container">
+        <div class="account-layout">
+          <!-- ========== SIDEBAR TRÁI ========== -->
+          <aside class="account-sidebar">
+            <div class="account-user">
+              <div class="account-avatar-img">
+                <!-- ảnh mặc định -->
+                <img src="/admin/img/avt.png" alt="Avatar BlueBook" />
+              </div>
+              <div class="account-user-text">
+                <!-- sau này bind EJS -->
+                <p class="account-name"><%=user['hoten']%></p>
+                <p class="account-username"><%=user['taikhoan']%></p>
+                <button class="account-edit-link" type="button">
+                  <i class="fa-solid fa-pen"></i> Sửa hồ sơ
+                </button>
+              </div>
+            </div>
+
+            <nav class="account-menu">
+              <p class="account-menu-title">Tài Khoản Của Tôi</p>
+              <a href="/edit_profile" class="account-menu-item active">Hồ sơ</a>
+              <a href="/user/donmua" class="account-menu-item">Đơn mua</a>
+              <a href="/user/doimatkhau" class="account-menu-item"
+                >Đổi mật khẩu</a
+              >
+            </nav>
+          </aside>
+
+          <!-- ========== FORM HỒ SƠ PHẢI ========== -->
+          <section class="account-main">
+            <div class="profile-card">
+              <div class="profile-header">
+                <h1>Hồ Sơ Của Tôi</h1>
+                <p>Quản lý thông tin hồ sơ để bảo mật tài khoản BlueBook.</p>
+              </div>
+
+              <div class="profile-content">
+                <form class="profile-form" method="POST" action="/edit_profile">
+                  <div class="profile-fields">
+                    <!-- Tên đăng nhập -->
+                    <div class="profile-row">
+                      <label class="profile-label">Tên đăng nhập</label>
+                      <div class="profile-input-wrap">
+                        <input
+                          type="text"
+                          name="taikhoan"
+                          class="profile-input input-readonly"
+                          value="<%=user['taikhoan']%>"
+                          readonly
+                        />
+                        <p class="profile-help">
+                          Tên đăng nhập chỉ có thể thiết lập một lần.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Họ và tên -->
+                    <div class="profile-row">
+                      <label class="profile-label">Họ và tên</label>
+                      <div class="profile-input-wrap">
+                        <input
+                          type="text"
+                          name="hoten"
+                          class="profile-input"
+                          placeholder="Nhập họ và tên"
+                          value="<%=user['hoten']%>"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="profile-row">
+                      <label class="profile-label">Email</label>
+                      <div class="profile-input-wrap">
+                        <input
+                          type="email"
+                          name="email"
+                          class="profile-input"
+                          placeholder="Nhập email"
+                          value="<%=user['email']%>"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Nút lưu -->
+                    <div class="profile-row profile-row-actions">
+                      <label class="profile-label"></label>
+                      <div class="profile-input-wrap">
+                        <button type="submit" class="btn-save">Lưu</button>
+                      </div>
+                    </div>
+                    <% if (error === "emailtontai") { %>
+                    <div class="alert alert-error">Email đã tồn tại</div>
+                    <% } %> <% if (success === "thanhcong") { %>
+                    <div class="alert alert-success">Cập nhật thành công</div>
+                    <% } %>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============= FOOTER GIỮ NGUYÊN ============= -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      setTimeout(() => {
+        document.querySelectorAll(".alert").forEach((el) => el.remove());
+      }, 2500);
+    </script>
+  </body>
+</html>

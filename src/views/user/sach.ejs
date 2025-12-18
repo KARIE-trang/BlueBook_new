@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đắc Nhân Tâm - BlueBook</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/users/css/home.css" />
+    <link rel="stylesheet" href="/users/css/chitietsach.css" />
+  </head>
+
+  <body>
+    <!-- ================== HEADER GIỮ NGUYÊN ================== -->
+    <header>
+      <a href="/home" class="logo">BlueBook</a>
+
+      <nav class="navbar">
+        <a href="/home">Trang Chủ</a>
+        <a href="/sanpham">Sản Phẩm</a>
+        <a href="#footer">Liên Hệ</a>
+      </nav>
+
+      <div class="icons">
+        <% if (users) { %>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a
+          href="/user/giohang"
+          class="fas fa-shopping-cart"
+          title="Giỏ hàng"
+        ></a>
+        <!-- Đã đăng nhập -->
+        <a href="/edit_profile" class="fas fa-user" title="Trang cá nhân"></a>
+        <a
+          href="/logout"
+          class="fas fa-right-from-bracket"
+          title="Đăng xuất"
+        ></a>
+        <% } else { %>
+        <!-- Chưa đăng nhập -->
+        <a href="/login" class="fas fa-user-lock" title="Đăng nhập"></a>
+        <a href="/register" class="fas fa-user-plus" title="Đăng ký"></a>
+        <% } %>
+      </div>
+    </header>
+    <!-- ================== NỘI DUNG CHI TIẾT SÁCH ================== -->
+    <main class="book-detail-page">
+      <nav class="breadcrumb">
+        <a href="/home">Trang chủ</a>
+        <span>/</span>
+        <a href="/sanpham">Tất cả sách</a>
+        <span>/</span>
+        <span class="current"><%=sach.tensach%></span>
+      </nav>
+
+      <section class="book-detail-main">
+        <!-- Ảnh -->
+        <div class="book-detail-left">
+          <div class="book-cover-wrapper">
+            <img
+              src="/uploads/<%=sach.hinhanh%>"
+              alt="Đắc Nhân Tâm"
+              class="book-cover-img"
+            />
+          </div>
+        </div>
+
+        <!-- Thông tin -->
+        <div class="book-detail-right">
+          <h1 class="book-title"><%=sach.tensach%></h1>
+
+          <div class="book-meta">
+            <div class="book-meta-item">
+              <span class="label">Tác giả:</span>
+              <span class="value"><%=sach.tentacgia%></span>
+            </div>
+
+            <div class="book-meta-item">
+              <span class="label">Thể loại:</span>
+              <span class="value"><%=sach.tentheloai%></span>
+            </div>
+
+            <div class="book-meta-item">
+              <span class="label">Ngaỳ phát hành:</span>
+              <span class="value"><%=sach.ngayphathanh%></span>
+            </div>
+
+            <div class="book-meta-item book-meta-desc">
+              <span class="label">Mô tả:</span>
+              <p class="value"><%= sach.mota %></p>
+            </div>
+          </div>
+
+          <!-- Giá -->
+          <div class="book-price-block">
+            <div class="book-price">
+              <%=Number(sach.giaban).toLocaleString("vi-VN")%>đ
+            </div>
+          </div>
+          <% if (sach.sl_tonkho > 0) { %>
+          <div class="book-actions">
+            <div class="action-buttons">
+              <form action="/user/add_giohang/<%= sach.masach %>" method="POST">
+                <input type="hidden" name="source" value="detail" />
+                <button type="submit" class="btn-primary">
+                  <i class="fa-solid fa-cart-plus"></i> Thêm giỏ
+                </button>
+              </form>
+            </div>
+
+            <% if (msg === "ADD_OK") { %>
+            <div class="toast-success">Thêm vào giỏ hàng thành công!</div>
+            <% } %> <% if (msg === "OUT_OF_STOCK") { %>
+            <div class="out-stock">Hết hàng</div>
+            <% } %>
+          </div>
+          <% } else { %>
+          <div class="out-stock">Hết hàng</div>
+          <% } %>
+        </div>
+      </section>
+    </main>
+    <!-- ================== FOOTER GIỮ NGUYÊN ================== -->
+    <section class="footer" id="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Các cơ sở</h3>
+          <a href="#">484 Lạch Tray, Đổng Quốc Bình, Lê Chân, Hải Phòng</a>
+          <a href="#">Kiến An, Hải Phòng</a>
+          <a href="#">Nghi Lộc, Nghệ An</a>
+        </div>
+
+        <div class="box">
+          <h3>Các mục</h3>
+          <a href="/home">Trang chủ</a>
+          <a href="/sanpham">Sản phẩm</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên lạc</h3>
+          <a href="#">+911379883</a>
+          <a href="#">+358624259</a>
+          <a href="#">bluebook@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Theo dõi chúng tôi</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script>
+    document.querySelectorAll(".cart-item").forEach((item) => {
+      const minusBtn = item.querySelector(".item-qty button:first-child");
+      const plusBtn = item.querySelector(".item-qty button:last-child");
+      const qtyInput = item.querySelector(".item-qty input");
+
+      // Giảm
+      minusBtn.addEventListener("click", () => {
+        let value = parseInt(qtyInput.value);
+        if (value > 1) {
+          qtyInput.value = value - 1;
+        }
+      });
+
+      // Tăng
+      plusBtn.addEventListener("click", () => {
+        let value = parseInt(qtyInput.value);
+        qtyInput.value = value + 1;
+      });
+
+      // Không cho nhập linh tinh
+      qtyInput.addEventListener("input", () => {
+        let value = parseInt(qtyInput.value);
+        if (isNaN(value) || value < 1) qtyInput.value = 1;
+      });
+      const toast = document.querySelector(".toast-success");
+      if (toast) setTimeout(() => toast.remove(), 2000);
+    });
+  </script>
+</html>

@@ -1,0 +1,158 @@
+/* ============================
+   PAGE HEADER
+=============================== */
+
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.page-header .title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #3f51b5;
+  margin-bottom: 6px;
+}
+
+.page-header .subtitle {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+}
+
+/* Nút thêm */
+.add-btn {
+  background: #4d6bff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  background: #3b54d1;
+}
+
+/* ============================
+   TABLE WRAPPER
+=============================== */
+
+.table-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  margin: 20px 30px;
+  overflow-x: auto;
+}
+
+/* ============================
+   TABLE STYLE
+=============================== */
+
+.cat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.cat-table th {
+  background: #f4f5f7; /* XÁM NHẠT */
+  padding: 12px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+}
+
+.cat-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  color: #222;
+}
+
+.cat-table tbody tr:hover {
+  background: #fafafa; /* hover nhẹ */
+}
+
+/* ============================
+   ACTION BUTTONS (ĐƠN GIẢN)
+=============================== */
+
+.action-col {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Nút chung */
+.action-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  background: #e8edff; /* Nền rất nhẹ */
+  color: #3f51b5; /* Icon xanh dịu */
+  transition: 0.2s;
+}
+
+.action-btn:hover {
+  background: #d8e0ff;
+}
+
+/* Icon */
+.action-btn i {
+  font-size: 15px;
+}
+
+/* Ẩn / Hiện */
+.action-btn.show {
+  background: #fff3cd;
+  color: #d39e00;
+}
+
+.action-btn.show:hover {
+  background: #ffe8a1;
+}
+
+/* nút HIỆN */
+.action-btn.hide {
+  background: #d4edda;
+  color: #1b7c38;
+}
+
+.action-btn.hide:hover {
+  background: #c3e6cb;
+}
+
+/* ============================
+   RESPONSIVE
+=============================== */
+
+@media (max-width: 768px) {
+  .action-col {
+    gap: 6px;
+  }
+}
+/* Thu nhỏ cột Số Lượng Sách */
+
+.cat-table th:nth-child(1),
+.cat-table td:nth-child(1) {
+  width: 80px; /* nhỏ gọn */
+  text-align: center; /* căn giữa cho đẹp */
+}
+.cat-table th:nth-child(2),
+.cat-table td:nth-child(2) {
+  width: 300px; /* nhỏ gọn */
+  text-align: center; /* căn giữa cho đẹp */
+}

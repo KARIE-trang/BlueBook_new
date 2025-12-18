@@ -1,0 +1,138 @@
+/* Căn layout chính */
+.main {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 240px; /* để tránh đè vào sidebar */
+}
+
+/* Tiêu đề */
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: black;
+  text-align: center;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: 15px;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Form card */
+.form-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.25s ease;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: block;
+  color: #374151;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d5d9fa;
+  background: #f7f8ff;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.form-group input:focus {
+  background: white;
+  border-color: #4d6bff;
+  box-shadow: 0 0 0 3px rgba(77, 107, 255, 0.18);
+}
+
+/* Error */
+.error p {
+  color: #e63946;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Buttons */
+.form-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.submit-btn {
+  padding: 11px 22px;
+  background: #4d6bff;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #3a54d1;
+}
+
+.cancel-btn {
+  padding: 11px 22px;
+  background: #e5e7eb;
+  color: #374151;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #d1d5db;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Làm input disabled nhìn rõ như input thường */
+.form-group input:disabled {
+  background: #eef1ff !important;
+  color: #374151;
+  opacity: 1;
+  cursor: not-allowed;
+  border: 1.5px solid #c7cef7;
+}
