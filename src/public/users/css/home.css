@@ -441,8 +441,10 @@ header .icons a:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
-  width: 85%;
-  margin: auto;
+  max-width: 1100px; /* ✅ GIỐNG cart-container */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 3.2%; /* khớp cart-page */
 }
 
 .footer .box {
