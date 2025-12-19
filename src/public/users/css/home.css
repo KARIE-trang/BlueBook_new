@@ -146,14 +146,14 @@ header .icons a:hover {
 
 .home .home-slider .slide .image img {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   height: auto;
 }
 
 .swiper-pagination {
   text-align: center;
-  margin-top: -4rem;
-  padding-bottom: 4rem;
+  margin-top: -6rem;
+  padding-bottom: 2rem;
 }
 
 .swiper-pagination-bullet {
@@ -310,7 +310,7 @@ header .icons a:hover {
 
 .book-cover {
   width: 100%;
-  height: 220px;
+  height: 260px;
   border-radius: 1.4rem;
   background: linear-gradient(135deg, #e3e7f0, #ffffff);
   display: flex;
