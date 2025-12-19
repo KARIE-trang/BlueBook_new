@@ -120,11 +120,13 @@
 
             <% for (let i = 0; i < sanpham.length; i++) { %>
             <div class="product">
-              <img
-                src="/uploads/<%= sanpham[i].hinhanh %>"
-                alt="<%= sanpham[i].tensach %>"
-                class="product-img"
-              />
+              <div class="product-thumb">
+                <img
+                  src="/uploads/<%= sanpham[i].hinhanh %>"
+                  alt="<%= sanpham[i].tensach %>"
+                  class="product-img"
+                />
+              </div>
 
               <div class="product-info">
                 <h3 class="product-name"><%= sanpham[i].tensach %></h3>

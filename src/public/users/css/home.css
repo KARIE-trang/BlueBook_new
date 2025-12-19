@@ -596,5 +596,10 @@ body {
 }
 
 main {
-  flex: 1;
+  flex: 1 0 auto; /* 👈 quan trọng: không cho co “đè” */
+}
+
+.footer {
+  flex-shrink: 0; /* 👈 footer không bị kéo chồng lên */
+  position: static; /* 👈 chặn mọi case footer bị fixed/absolute do css khác */
 }
